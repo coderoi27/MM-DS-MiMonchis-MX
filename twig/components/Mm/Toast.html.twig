@@ -1,0 +1,9 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Toast — .mm-toast · efímero (autocierre 6 s, máx. 3 apilados; lo gestiona el Stimulus). aria-live="polite", z-index --mm-z-toast.
+   Uso: <twig:Mm:Toast icon="circle-check">Publicación enviada a revisión</twig:Mm:Toast> #}
+{% props icon = 'circle-check' %}
+<div {{ attributes.defaults({class: 'mm-toast', role: 'status', 'aria-live': 'polite'}) }}>
+    <twig:Mm:Icon :name="icon" />
+    <span>{% block content %}{% endblock %}</span>
+    <button class="mm-icon-btn" aria-label="Cerrar" data-action="click->mm-toast#close" type="button"><twig:Mm:Icon name="x" /></button>
+</div>

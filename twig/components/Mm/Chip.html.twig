@@ -1,0 +1,13 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Chip — .mm-chip · filtro/selección (interactivo). Con href emite <a aria-current>, sin href <button aria-pressed>.
+   variant: null|distance. Uso: <twig:Mm:Chip icon="navigation" variant="distance" :pressed="false">A 1 km</twig:Mm:Chip> #}
+{% props variant = null, icon = null, pressed = null, current = null %}
+{% set tag = attributes.all.href is defined ? 'a' : 'button' %}
+{% set cls = 'mm-chip' ~ (variant ? ' mm-chip--' ~ variant : '') %}
+{% set state = tag == 'a'
+    ? {'aria-current': current ? 'true' : null}
+    : {type: 'button', 'aria-pressed': pressed is null ? null : (pressed ? 'true' : 'false')} %}
+<{{ tag }} {{ attributes.defaults({class: cls}).defaults(state) }}>
+    {%- if icon %}<twig:Mm:Icon :name="icon" size="sm" />{% endif -%}
+    <span class="lbl">{% block content %}{% endblock %}</span>
+</{{ tag }}>

@@ -1,0 +1,10 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Switch — .mm-switch · role="switch"; el estado se anuncia también con texto (no solo color).
+   Los textos viajan en data-on / data-off para que el Stimulus los alterne al cambiar.
+   Uso: <twig:Mm:Switch name="social" label="Publicaciones sociales" :checked="true" /> #}
+{% props name, label, checked = false, onLabel = 'Activado', offLabel = 'Desactivado' %}
+<label class="mm-switch">
+    <input {{ attributes.defaults({type: 'checkbox', role: 'switch', name: name, checked: checked ? true : null, 'data-mm-switch': ''}) }}>
+    <span>{{ label }}</span>
+    <span class="st" aria-live="polite" data-on="{{ onLabel }}" data-off="{{ offLabel }}">{{ checked ? onLabel : offLabel }}</span>
+</label>

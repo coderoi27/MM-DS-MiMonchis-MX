@@ -1,0 +1,8 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Check — .mm-check · casilla o radio con etiqueta clicable. Formularios con «Guardar» = casilla; acciones inmediatas = Mm:Switch.
+   Uso: <twig:Mm:Check name="terms" label="Acepto los términos" :checked="true" /> · type="radio" para opciones exclusivas #}
+{% props name, label = null, type = 'checkbox', value = '1', checked = false %}
+<label class="mm-check">
+    <input {{ attributes.defaults({type: type, name: name, value: value, checked: checked ? true : null}) }}>
+    <span>{% block content %}{{ label }}{% endblock %}</span>
+</label>

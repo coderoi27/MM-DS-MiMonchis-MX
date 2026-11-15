@@ -1,0 +1,10 @@
+/* MM-DS v1.0.0 · components/tabs.css · 13. Pestañas · NO editar en la app */
+.mm-tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--mm-border-strong);overflow-x:auto}
+.mm-tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:0 1rem;min-height:var(--mm-control-md);font:inherit;font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-semibold);color:var(--mm-text-muted);cursor:pointer;white-space:nowrap}
+.mm-tab:hover{color:var(--mm-text-strong);background:var(--mm-slate-50)}
+.mm-tab[aria-selected="true"]{color:var(--mm-text-strong);border-bottom-color:var(--mm-brand-700)}
+.mm-tabs--segmented{display:inline-flex;border:0;background:var(--mm-slate-100);border-radius:var(--mm-radius-full);padding:4px;gap:2px}
+.mm-tabs--segmented .mm-tab{border:0;margin:0;border-radius:var(--mm-radius-full);min-height:36px}
+.mm-tabs--segmented .mm-tab[aria-selected="true"]{background:var(--mm-surface);box-shadow:var(--mm-shadow-xs)}
+.mm-panel{padding:1rem 0}
+.mm-panel[hidden]{display:none}

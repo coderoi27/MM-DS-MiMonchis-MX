@@ -1,0 +1,20 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Tabbar — .mm-tabbar · barra inferior móvil (< 1024 px), UN solo parcial, 6 columnas. Orden funcional:
+   Home · Explorar · Favoritos · FAB mapa/lista (fab: true) · Mis ubis · Perfil. Etiqueta de 12 px siempre visible.
+   «items» = [{key, label, icon, href, count?, fab?}]; «count» lleva aria-label completo. Uso: <twig:Mm:Tabbar :items="tabs" current="explorar" /> #}
+{% props items = [], current = null %}
+<nav {{ attributes.defaults({class: 'mm-tabbar', 'aria-label': 'Navegación principal'}) }}>
+    {% for item in items %}
+        {% if item.fab is defined and item.fab %}
+            <div class="mm-tabbar__fab">
+                <a class="mm-icon-btn mm-icon-btn--brand" href="{{ item.href }}" aria-label="{{ item.label }}"><twig:Mm:Icon :name="item.icon" size="lg" /></a>
+                <span>{{ item.short ?? item.label }}</span>
+            </div>
+        {% else %}
+            <a class="mm-tabbar__item" href="{{ item.href }}"{{ item.key == current ? ' aria-current="page"' : '' }}>
+                <twig:Mm:Icon :name="item.icon" />{{ item.label }}
+                {% if item.count is defined and item.count %}<span class="mm-tabbar__count" aria-label="{{ item.count }} pendientes">{{ item.count }}</span>{% endif %}
+            </a>
+        {% endif %}
+    {% endfor %}
+</nav>

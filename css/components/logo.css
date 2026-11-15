@@ -1,0 +1,4 @@
+/* MM-DS v1.0.0 · components/logo.css · Logo (sprite en línea) · NO editar en la app */
+.mm-logo{height:26px;width:auto;display:block;aspect-ratio:384.32/49.29}
+.mm-logo-y{fill:var(--mm-logo-yellow)}.mm-logo-o{fill:var(--mm-brand-500)}.mm-logo-ink{fill:var(--mm-logo-ink)}
+.mm-logo--on-dark{--mm-logo-ink:var(--mm-white)}

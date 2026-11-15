@@ -1,0 +1,5 @@
+/* MM-DS v1.0.0 · components/toast.css · 12. Toast · NO editar en la app */
+.mm-toast{display:flex;gap:.75rem;align-items:center;background:var(--mm-surface-inverse);color:var(--mm-white);border-radius:var(--mm-radius-lg);padding:.8rem .9rem .8rem 1rem;box-shadow:var(--mm-shadow-lg);font-size:var(--mm-text-sm);max-width:380px}
+.mm-toast .mm-icon:first-child{color:var(--mm-brand-300)}
+.mm-toast .mm-icon-btn{color:var(--mm-white);margin-left:auto;width:36px;height:36px}
+.mm-toast .mm-icon-btn:hover{background:var(--mm-hover-on-dark)}

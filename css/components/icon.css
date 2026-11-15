@@ -1,0 +1,4 @@
+/* MM-DS v1.0.0 · components/icon.css · Ícono Lucide (SVG en línea o sprite) · NO editar en la app */
+.mm-icon{width:var(--mm-icon-md);height:var(--mm-icon-md);flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mm-icon--sm{width:var(--mm-icon-sm);height:var(--mm-icon-sm)}
+.mm-icon--lg{width:var(--mm-icon-lg);height:var(--mm-icon-lg)}

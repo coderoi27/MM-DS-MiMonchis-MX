@@ -1,0 +1,7 @@
+/* MM-DS v1.0.0 · components/modal.css · 9. Modal (<dialog>; velo oscuro en Admin/Locals) · NO editar en la app */
+.mm-modal{border:0;padding:0;border-radius:var(--mm-radius-xl);box-shadow:var(--mm-shadow-lg);width:min(92vw,460px);color:var(--mm-text);background:var(--mm-surface)}
+.mm-modal::backdrop{background:var(--mm-scrim)}
+.mm-modal__head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.25rem 1.25rem .5rem}
+.mm-modal__body{padding:0 1.25rem 1rem;max-height:60vh;overflow:auto;overscroll-behavior:contain}
+.mm-modal__foot{display:flex;justify-content:flex-end;gap:.75rem;padding:1rem 1.25rem 1.25rem;flex-wrap:wrap}
+.mm-modal__title{margin:0;font-size:var(--mm-text-lg);font-weight:var(--mm-font-weight-semibold);line-height:var(--mm-leading-snug);color:var(--mm-text-strong)}

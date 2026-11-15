@@ -1,0 +1,40 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+/* Regenera manifest.json (versión de VERSION + huella SHA-256 de cada archivo). Ejecutar tras editar el paquete. */
+require __DIR__ . '/_lib.php';
+$root = mmds_root();
+$version = trim((string)file_get_contents($root . '/VERSION'));
+if (!preg_match('/^\d+\.\d+\.\d+$/', $version)) { fwrite(STDERR, "✗ VERSION debe ser semver (X.Y.Z).\n"); exit(1); }
+
+$icons = [];
+foreach (glob($root . '/icons/lucide/*.svg') as $f) $icons[] = basename($f, '.svg');
+sort($icons);
+
+$prev = is_file($root . '/manifest.json') ? json_decode((string)file_get_contents($root . '/manifest.json'), true) : [];
+$files = [];
+foreach (mmds_package_files($root) as $rel) $files[$rel] = mmds_sha($root . '/' . $rel);
+
+$manifest = [
+    'name' => 'MM-DS',
+    'version' => $version,
+    'description' => 'Sistema de diseño único de Mi Monchis MX: tokens, CSS, componentes Twig, íconos, fuente y marca.',
+    'apps' => $prev['apps'] ?? [
+        'public' => ['dir' => 'Public-MiMonchisMX', 'tailwind' => false],
+        'admin'  => ['dir' => 'Admin-MiMonchisMX',  'tailwind' => true],
+        'locals' => ['dir' => 'Locals-MiMonchisMX', 'tailwind' => true],
+    ],
+    'targets' => $prev['targets'] ?? [
+        ['tokens/', 'assets/mm-ds/tokens/'],
+        ['css/', 'assets/mm-ds/css/'],
+        ['fonts/', 'assets/mm-ds/fonts/'],
+        ['icons/', 'assets/mm-ds/icons/'],
+        ['brand/', 'assets/mm-ds/brand/'],
+        ['twig/components/Mm/', 'templates/components/Mm/'],
+    ],
+    'onlyFor' => $prev['onlyFor'] ?? ['tokens/mm-tailwind.css' => ['admin', 'locals']],
+    'icons' => $icons,
+    'files' => $files,
+];
+file_put_contents($root . '/manifest.json', json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
+printf("✓ manifest.json · MM-DS v%s · %d archivos · %d íconos\n", $version, count($files), count($icons));

@@ -1,0 +1,15 @@
+/* MM-DS v1.0.0 · components/table.css · 10. Tabla (+ toolbar y barra de selección) · NO editar en la app */
+.mm-table-wrap{overflow-x:auto;border:1px solid var(--mm-border);border-radius:var(--mm-radius-lg);background:var(--mm-surface)}
+.mm-table{width:100%;border-collapse:collapse;font-size:var(--mm-text-sm)}
+.mm-table th{position:sticky;top:0;background:var(--mm-surface-muted);text-align:left;font-size:var(--mm-text-xs);font-weight:var(--mm-font-weight-medium);text-transform:uppercase;letter-spacing:.04em;color:var(--mm-text-muted);padding:.7rem 1rem;border-bottom:1px solid var(--mm-border);white-space:nowrap}
+.mm-table td{padding:0 1rem;height:44px;border-bottom:1px solid var(--mm-border);color:var(--mm-text)}
+.mm-table--dense td{height:36px}
+.mm-table tr:last-child td{border-bottom:0}
+.mm-table tbody tr:hover,.mm-table tbody tr.is-hover{background:var(--mm-surface-muted)}
+.mm-table tbody tr[aria-selected="true"]{background:var(--mm-brand-50)}
+.mm-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.mm-table .act{text-align:right;white-space:nowrap}
+.mm-toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:end;margin-bottom:1rem}
+.mm-bulk{display:flex;align-items:center;gap:.75rem;background:var(--mm-surface-inverse);color:var(--mm-white);border-radius:var(--mm-radius-full);padding:.4rem .5rem .4rem 1.1rem;font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-medium);width:fit-content;margin-bottom:.75rem}
+.mm-bulk .mm-btn{--bg:var(--mm-white);--fg:var(--mm-text-strong);--bd:var(--mm-white)}
+.mm-table th{text-transform:none;letter-spacing:0}

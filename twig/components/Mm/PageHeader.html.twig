@@ -1,0 +1,21 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:PageHeader — .mm-page-header · UNA <h1> por vista. «crumbs» = [{label, href}] (solo panel; el último es la página actual, sin href).
+   Bloques: actions (máx. 1 primaria + 1 secundaria) · badge. Sin mayúsculas sostenidas.
+   Uso: <twig:Mm:PageHeader title="Claims de locales" description="Revisa identidad y evidencia." :crumbs="[…]"> <twig:block name="actions">…</twig:block> #}
+{% props title, description = null, eyebrow = null, crumbs = [], level = 1 %}
+<header {{ attributes.defaults({class: 'mm-page-header'}) }}>
+    <div>
+        {% if crumbs %}
+            <nav aria-label="Ruta"><ol class="mm-crumbs">
+                {% for crumb in crumbs %}
+                    <li>{% if crumb.href is defined and not loop.last %}<a href="{{ crumb.href }}">{{ crumb.label }}</a>{% else %}<span aria-current="page">{{ crumb.label }}</span>{% endif %}</li>
+                    {% if not loop.last %}<li aria-hidden="true"><twig:Mm:Icon name="chevron-right" size="sm" /></li>{% endif %}
+                {% endfor %}
+            </ol></nav>
+        {% endif %}
+        {% if eyebrow %}<div class="mm-page-header__eyebrow">{{ eyebrow }}</div>{% endif %}
+        <h{{ level }}>{{ title }}</h{{ level }}>
+        {% if description %}<p>{{ description }}</p>{% endif %}
+    </div>
+    <div class="mm-page-header__actions">{% block badge %}{% endblock %}{% block actions %}{% endblock %}</div>
+</header>

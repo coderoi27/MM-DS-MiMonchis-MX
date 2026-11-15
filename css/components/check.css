@@ -1,0 +1,15 @@
+/* MM-DS v1.0.0 · components/check.css · 5. Checkbox, radio y switch · NO editar en la app */
+/* 5. Check / radio / switch */
+.mm-check{display:flex;align-items:center;gap:.65rem;min-height:var(--mm-control-md);cursor:pointer;font-size:var(--mm-text-base)}
+.mm-check input{appearance:none;width:24px;height:24px;flex:none;margin:0;border:2px solid var(--mm-border-input);border-radius:7px;background:var(--mm-surface) center/16px no-repeat;display:grid;place-content:center;cursor:pointer;transition:background-color var(--mm-dur-fast)}
+.mm-check input[type="radio"]{border-radius:50%}
+.mm-check input:checked{background-color:var(--mm-brand-700);border-color:var(--mm-brand-700);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+.mm-check input[type="radio"]:checked{background-image:radial-gradient(circle,var(--mm-white) 0 4px,transparent 5px)}
+.mm-check input:disabled{opacity:.5;cursor:not-allowed}
+.mm-switch{display:inline-flex;align-items:center;gap:.65rem;min-height:var(--mm-control-md);cursor:pointer}
+.mm-switch input{appearance:none;width:44px;height:24px;border-radius:99px;background:var(--mm-slate-500);position:relative;margin:0;cursor:pointer;transition:background-color var(--mm-dur-base) var(--mm-ease);flex:none}
+.mm-switch input::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--mm-white);transition:transform var(--mm-dur-base) var(--mm-ease)}
+.mm-switch input:checked{background:var(--mm-brand-700)}
+.mm-switch input:checked::after{transform:translateX(20px)}
+.mm-switch input:disabled{opacity:.5;cursor:not-allowed}
+.mm-switch .st{font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-medium);color:var(--mm-text-muted);min-width:5.5ch}

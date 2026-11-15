@@ -1,0 +1,5 @@
+/* MM-DS v1.0.0 · components/breadcrumb.css · Apoyo: migas de pan · NO editar en la app */
+.mm-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;font-size:var(--mm-text-sm);color:var(--mm-text-muted);list-style:none;padding:0;margin:0 0 .5rem}
+.mm-crumbs a{color:var(--mm-text-muted);text-decoration:none}
+.mm-crumbs a:hover{text-decoration:underline}
+.mm-crumbs [aria-current]{color:var(--mm-text-strong);font-weight:var(--mm-font-weight-medium)}

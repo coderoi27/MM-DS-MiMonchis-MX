@@ -1,0 +1,28 @@
+/* MM-DS v1.0.0 · mm-tailwind.css · solo Admin y Locals (Tailwind 4 / tailwind-bundle) · NO editar en la app
+   Se importa DESPUÉS de mm-tokens.css y de @import "tailwindcss". */
+@theme inline {
+  --color-brand-50:  var(--mm-brand-50);   --color-brand-100: var(--mm-brand-100);
+  --color-brand-200: var(--mm-brand-200);  --color-brand-300: var(--mm-brand-300);
+  --color-brand-400: var(--mm-brand-400);  --color-brand-500: var(--mm-brand-500);
+  --color-brand-600: var(--mm-brand-600);  --color-brand-700: var(--mm-brand-700);
+  --color-brand-800: var(--mm-brand-800);  --color-brand-900: var(--mm-brand-900);
+  --color-on-brand: var(--mm-on-brand);
+  --color-ink: var(--mm-text-strong);      --color-body: var(--mm-text);
+  --color-muted: var(--mm-text-muted);     --color-subtle: var(--mm-text-subtle);
+  --color-canvas: var(--mm-canvas);        --color-surface: var(--mm-surface);
+  --color-surface-muted: var(--mm-surface-muted);
+  --color-line: var(--mm-border);          --color-line-strong: var(--mm-border-strong);
+  --color-line-input: var(--mm-border-input);
+  --color-success: var(--mm-success-700);  --color-success-bg: var(--mm-success-bg);
+  --color-warning: var(--mm-warning-700);  --color-warning-bg: var(--mm-warning-bg);
+  --color-danger: var(--mm-danger-600);    --color-danger-bg: var(--mm-danger-bg);
+  --color-info: var(--mm-info-700);        --color-info-bg: var(--mm-info-bg);
+  --font-sans: var(--mm-font-body);
+  --font-display: var(--mm-font-body);   /* v1.1: solo Outfit */
+  --font-mono: var(--mm-font-mono);
+  --radius-sm: var(--mm-radius-sm);  --radius-md: var(--mm-radius-md);
+  --radius-lg: var(--mm-radius-lg);  --radius-xl: var(--mm-radius-xl);
+  --shadow-xs: var(--mm-shadow-xs);  --shadow-sm: var(--mm-shadow-sm);
+  --shadow-md: var(--mm-shadow-md);  --shadow-lg: var(--mm-shadow-lg);
+  --ease-mm: var(--mm-ease);
+}

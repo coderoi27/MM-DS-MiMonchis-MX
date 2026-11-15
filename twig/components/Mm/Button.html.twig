@@ -1,0 +1,17 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Button — .mm-btn · con href se emite <a>, sin href <button>. Un solo variant="primary" visible por vista.
+   Uso: <twig:Mm:Button variant="primary" icon="plus">Nuevo local</twig:Mm:Button> #}
+{% props variant = 'primary', size = 'md', type = 'button', icon = null, iconEnd = null, loading = false, block = false %}
+{% set tag = attributes.all.href is defined ? 'a' : 'button' %}
+{% set cls = 'mm-btn mm-btn--' ~ variant ~ (size != 'md' ? ' mm-btn--' ~ size : '') ~ (block ? ' mm-btn--block' : '') %}
+<{{ tag }} {{ attributes.defaults({class: cls, 'aria-busy': loading ? 'true' : null}).defaults(tag == 'button' ? {type: type, disabled: loading ? true : null} : {}) }}>
+    {%- if loading -%}
+        <twig:Mm:Icon name="refresh-cw" class="mm-spin" />
+    {%- elseif icon -%}
+        <twig:Mm:Icon :name="icon" :size="size == 'sm' ? 'sm' : 'md'" />
+    {%- endif -%}
+    {%- block content %}{% endblock -%}
+    {%- if iconEnd and not loading -%}
+        <twig:Mm:Icon :name="iconEnd" :size="size == 'sm' ? 'sm' : 'md'" />
+    {%- endif -%}
+</{{ tag }}>

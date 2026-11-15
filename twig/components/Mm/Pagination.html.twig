@@ -1,0 +1,11 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Pagination — .mm-pagination · «Anterior»/«Siguiente» + «Página X de Y». prevUrl/nextUrl null = extremo (aria-disabled).
+   Listas por cursor: omitir «pages». Conserva los filtros en la URL. Uso: <twig:Mm:Pagination :page="2" :pages="9" prevUrl="?p=1" nextUrl="?p=3" /> #}
+{% props page = 1, pages = null, prevUrl = null, nextUrl = null, summary = null %}
+<nav {{ attributes.defaults({class: 'mm-pagination', 'aria-label': 'Paginación'}) }}>
+    <span>{{ summary ?? (pages ? 'Página ' ~ page ~ ' de ' ~ pages : 'Página ' ~ page) }}</span>
+    <div class="row">
+        <twig:Mm:Button variant="secondary" size="sm" icon="chevron-left" :href="prevUrl ?? '#'" :aria-disabled="prevUrl ? null : 'true'" :tabindex="prevUrl ? null : '-1'">Anterior</twig:Mm:Button>
+        <twig:Mm:Button variant="secondary" size="sm" iconEnd="chevron-right" :href="nextUrl ?? '#'" :aria-disabled="nextUrl ? null : 'true'" :tabindex="nextUrl ? null : '-1'">Siguiente</twig:Mm:Button>
+    </div>
+</nav>

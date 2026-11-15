@@ -1,0 +1,11 @@
+/* MM-DS v1.0.0 · components/avatar.css · 8. Avatar · NO editar en la app */
+/* 8. Avatar */
+.mm-avatar{position:relative;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--mm-brand-100);color:var(--mm-brand-800);font-family:var(--mm-font-body);font-weight:var(--mm-font-weight-semibold);font-size:var(--mm-text-sm);flex:none}
+.mm-avatar--24{width:24px;height:24px;font-size:11px}
+.mm-avatar--32{width:32px;height:32px;font-size:12px}
+.mm-avatar--56{width:56px;height:56px;font-size:var(--mm-text-lg)}
+.mm-avatar--96{width:96px;height:96px;font-size:var(--mm-text-2xl)}
+.mm-avatar--ring{box-shadow:0 0 0 3px var(--mm-surface),0 0 0 5px var(--mm-brand-500)}
+.mm-avatar--founder .mm-icon{position:absolute;right:-4px;bottom:-4px;width:20px;height:20px;background:var(--mm-surface);border-radius:50%;color:var(--mm-brand-700);padding:1px}
+.mm-avatar--32.mm-avatar--founder .mm-icon{width:15px;height:15px;right:-4px;bottom:-4px}
+.mm-avatar>img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}

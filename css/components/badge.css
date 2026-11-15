@@ -1,0 +1,9 @@
+/* MM-DS v1.0.0 · components/badge.css · 7. Insignia · NO editar en la app */
+/* 7. Insignia y chip */
+.mm-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .65rem;border-radius:var(--mm-radius-full);font-size:var(--mm-text-xs);font-weight:var(--mm-font-weight-semibold);line-height:1.4;white-space:nowrap;background:var(--mm-slate-100);color:var(--mm-slate-700);max-width:100%}
+.mm-badge .mm-icon{width:14px;height:14px}
+.mm-badge--brand{background:var(--mm-brand-100);color:var(--mm-brand-800)}
+.mm-badge--success{background:var(--mm-success-bg);color:var(--mm-success-800)}
+.mm-badge--warning{background:var(--mm-warning-bg);color:var(--mm-warning-700)}
+.mm-badge--danger{background:var(--mm-danger-bg);color:var(--mm-danger-600)}
+.mm-badge--info{background:var(--mm-info-bg);color:var(--mm-info-700)}

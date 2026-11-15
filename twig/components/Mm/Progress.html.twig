@@ -1,0 +1,4 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Progress — .mm-progress · preparación alpha %, subida de media. Uso: <twig:Mm:Progress label="Preparación del local" :value="72" /> #}
+{% props label, value = 0 %}
+<div {{ attributes.defaults({class: 'mm-progress', role: 'progressbar', 'aria-label': label, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': value}) }}><i style="width:{{ value }}%"></i></div>

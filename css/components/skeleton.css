@@ -1,0 +1,4 @@
+/* MM-DS v1.0.0 · components/skeleton.css · Apoyo: esqueleto de carga · NO editar en la app */
+.mm-skel{background:linear-gradient(90deg,var(--mm-slate-100),var(--mm-slate-200),var(--mm-slate-100));background-size:200% 100%;animation:mm-sk 1.4s infinite;border-radius:8px;height:14px}
+@keyframes mm-sk{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.mm-skel{animation:none}}

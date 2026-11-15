@@ -1,0 +1,15 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Avatar — .mm-avatar · tamaños 24/32/40/56/96. Con «src» usa imagen (alt = nombre, o vacío si el nombre aparece al lado);
+   sin «src», iniciales. founder = insignia badge-check; ring = anillo de historias.
+   Uso: <twig:Mm:Avatar name="Rodrigo Sánchez" :size="56" founder /> #}
+{% props name = '', src = null, size = 40, founder = false, ring = false, alt = null %}
+{% set initials = name|trim|split(' ')|filter(p => p != '')|slice(0, 2)|map(p => p|first|upper)|join('') %}
+{% set cls = 'mm-avatar' ~ (size != 40 ? ' mm-avatar--' ~ size : '') ~ (founder ? ' mm-avatar--founder' : '') ~ (ring ? ' mm-avatar--ring' : '') %}
+<span {{ attributes.defaults({class: cls}) }}>
+    {%- if src -%}
+        <img src="{{ src }}" alt="{{ alt ?? name }}" width="{{ size }}" height="{{ size }}">
+    {%- else -%}
+        <span aria-hidden="{{ name ? 'true' : 'false' }}">{{ initials }}</span>{% if name %}<span class="mm-sr-only">{{ name }}</span>{% endif %}
+    {%- endif -%}
+    {%- if founder %}<twig:Mm:Icon name="badge-check" />{% endif -%}
+</span>

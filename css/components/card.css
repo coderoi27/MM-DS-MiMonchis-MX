@@ -1,0 +1,13 @@
+/* MM-DS v1.0.0 · components/card.css · 6. Tarjeta (+ mm-stat) · NO editar en la app */
+/* 6. Tarjeta */
+.mm-card{background:var(--mm-surface);border:1px solid var(--mm-border);border-radius:var(--mm-radius-lg);box-shadow:var(--mm-shadow-xs);padding:var(--mm-space-5);display:grid;gap:var(--mm-space-3);align-content:start;min-width:0}
+.mm-card--glass{background:var(--mm-glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--mm-glass-border);box-shadow:var(--mm-shadow-glass)}
+.mm-card--interactive{cursor:pointer;transition:box-shadow var(--mm-dur-base) var(--mm-ease),transform var(--mm-dur-base) var(--mm-ease),border-color var(--mm-dur-base)}
+.mm-card--interactive:hover,.mm-card--interactive.is-hover{box-shadow:var(--mm-shadow-md);transform:translateY(-2px)}
+.mm-card--selected{border:2px solid var(--mm-brand-700)}
+.mm-card__media{margin:calc(var(--mm-space-5)*-1) calc(var(--mm-space-5)*-1) 0;aspect-ratio:16/9;border-radius:var(--mm-radius-lg) var(--mm-radius-lg) 0 0;background:linear-gradient(135deg,var(--mm-brand-200),var(--mm-brand-100) 55%,var(--mm-white));display:grid;place-items:center;color:var(--mm-brand-700)}
+.mm-card__title{font-family:var(--mm-font-body);font-weight:var(--mm-font-weight-semibold);font-size:var(--mm-text-md);color:var(--mm-text-strong);line-height:var(--mm-leading-snug)}
+.mm-card__meta{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:var(--mm-text-sm);color:var(--mm-text-muted)}
+.mm-stat{display:grid;gap:.15rem}
+.mm-stat b{font-family:var(--mm-font-body);font-size:var(--mm-text-3xl);font-weight:var(--mm-font-weight-semibold);color:var(--mm-text-strong);line-height:1.1;font-variant-numeric:tabular-nums}
+.mm-stat span{font-size:var(--mm-text-sm);color:var(--mm-text-muted);font-weight:var(--mm-font-weight-medium)}

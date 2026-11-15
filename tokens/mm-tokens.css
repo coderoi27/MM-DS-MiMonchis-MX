@@ -1,0 +1,152 @@
+/* ==== MM-DS v1.0.0 · mm-tokens.css · archivo idéntico en Public, Admin y Locals · NO editar en la app ==== */
+:root {
+  /* — Marca (escala naranja). 500 = #F27F0D, color de marca fijo — */
+  --mm-brand-50:  #FFF7ED;
+  --mm-brand-100: #FFEADB;
+  --mm-brand-200: #FFD7BD;
+  --mm-brand-300: #FFB783;
+  --mm-brand-400: #FB9A3C;
+  --mm-brand-500: #F27F0D;   /* relleno de botón/acento: SIEMPRE con texto --mm-on-brand */
+  --mm-brand-600: #D96A00;   /* presionado */
+  --mm-brand-700: #B34700;   /* texto/íconos/enlaces de marca sobre claro (5.50:1 sobre blanco) */
+  --mm-brand-800: #944A00;   /* enlace visitado / texto sobre brand-100 */
+  --mm-brand-900: #562900;
+  --mm-brand-hover: #E8730A; /* hover del botón primario (tinta sobre él: 5.98:1) */
+  --mm-on-brand: #1F1300;    /* tinta sobre brand-500 (6.79:1) */
+
+  /* — Neutros (slate: una sola familia) — */
+  --mm-slate-50:  #F8FAFC;
+  --mm-slate-100: #F1F5F9;
+  --mm-slate-200: #E2E8F0;
+  --mm-slate-300: #CBD5E1;
+  --mm-slate-400: #94A3B8;   /* solo decoración/deshabilitado; nunca texto informativo */
+  --mm-slate-500: #64748B;
+  --mm-slate-600: #475569;
+  --mm-slate-700: #334155;
+  --mm-slate-800: #1E293B;
+  --mm-slate-900: #0F172A;
+
+  /* — Semánticos de superficie, texto y borde (lo que consumen los componentes) — */
+  --mm-canvas: #FFF8F5;          /* fondo de página (Public, Locals) */
+  --mm-canvas-panel: #F1F5F9;    /* fondo de página (Admin) */
+  --mm-surface: #FFFFFF;
+  --mm-surface-muted: #F8FAFC;
+  --mm-surface-brand: #FFF1E6;
+  --mm-surface-inverse: #0F172A;
+  --mm-text-strong: #0F172A;     /* títulos */
+  --mm-text: #334155;            /* cuerpo */
+  --mm-text-muted: #475569;      /* secundario (7.58:1) */
+  --mm-text-subtle: #64748B;     /* terciario, solo sobre blanco (4.76:1) */
+  --mm-text-brand: #B34700;
+  --mm-link: #B34700;
+  --mm-link-hover: #944A00;
+  --mm-border: #E2E8F0;          /* divisores decorativos */
+  --mm-border-strong: #CBD5E1;
+  --mm-border-input: #78879C;    /* borde de campo (3.66:1, WCAG 1.4.11) */
+  --mm-focus: #B34700;           /* anillo de foco sobre claro (5.50:1) */
+  --mm-focus-on-dark: #FFB783;   /* anillo de foco sobre oscuro (10.5:1) */
+
+  /* — Estados — */
+  --mm-success-500: #16A34A;     /* solo ícono/relleno decorativo (3.30:1) */
+  --mm-success-700: #15803D;     /* texto y relleno con texto blanco (5.02:1) */
+  --mm-success-bg:  #DCFCE7;
+  --mm-success-border: #86EFAC;
+  --mm-warning-500: #F59E0B;
+  --mm-warning-700: #92400E;
+  --mm-warning-bg:  #FEF3C7;
+  --mm-warning-border: #FCD34D;
+  --mm-danger-600:  #B91C1C;     /* texto y relleno con texto blanco (6.47:1) */
+  --mm-danger-bg:   #FEE2E2;
+  --mm-danger-border: #FCA5A5;
+  --mm-info-700:    #1D4ED8;
+  --mm-info-bg:     #EFF6FF;
+  --mm-info-border: #BFDBFE;
+  --mm-favorite: #F43F5E;        /* corazón (ícono, 3.67:1) */
+  --mm-rating:   #FFCC00;        /* estrella: siempre acompañada de la cifra */
+
+  /* — Tipografía — */
+  --mm-font-body:    'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mm-font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --mm-text-xs:   0.75rem;   /* 12px: mínimo permitido */
+  --mm-text-sm:   0.875rem;  /* 14px */
+  --mm-text-base: 1rem;      /* 16px */
+  --mm-text-md:   1.125rem;
+  --mm-text-lg:   1.25rem;
+  --mm-text-xl:   1.5rem;
+  --mm-text-2xl:  1.875rem;
+  --mm-text-3xl:  clamp(1.75rem, 4vw, 2.25rem);
+  --mm-text-4xl:  clamp(2rem, 6vw, 3rem);
+  --mm-font-weight-regular: 400;   /* cuerpo, ayudas */
+  --mm-font-weight-medium: 500;    /* etiquetas, enlaces, datos clave */
+  --mm-font-weight-semibold: 600;  /* botones, chips, insignias, títulos de sección */
+  --mm-font-weight-bold: 700;      /* solo el título principal de una pantalla */
+  /* 800 y 900 prohibidos dentro de componentes */
+  --mm-leading-tight: 1.2;
+  --mm-leading-snug: 1.35;
+  --mm-leading-normal: 1.5;
+  --mm-leading-relaxed: 1.65;
+  --mm-tracking-eyebrow: 0.08em;
+
+  /* — Espaciado (base 4px) — */
+  --mm-space-1: 0.25rem;  --mm-space-2: 0.5rem;   --mm-space-3: 0.75rem;
+  --mm-space-4: 1rem;     --mm-space-5: 1.25rem;  --mm-space-6: 1.5rem;
+  --mm-space-8: 2rem;     --mm-space-10: 2.5rem;  --mm-space-12: 3rem;
+  --mm-space-16: 4rem;
+
+  /* — Radios — */
+  --mm-radius-sm: 8px;
+  --mm-radius-md: 12px;      /* campos */
+  --mm-radius-lg: 18px;      /* tarjetas */
+  --mm-radius-xl: 28px;      /* sheets, modales, paneles hero */
+  --mm-radius-full: 999px;   /* botones, chips, insignias, avatares */
+
+  /* — Sombras — */
+  --mm-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --mm-shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --mm-shadow-md: 0 10px 24px rgba(15, 23, 42, 0.10);
+  --mm-shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.14);
+  --mm-shadow-brand: 0 12px 28px rgba(242, 127, 13, 0.28);
+  --mm-shadow-glass: 0 24px 48px rgba(15, 23, 42, 0.08);
+  /* — Hoja/modal con fondo difuminado (liquid glass) — */
+  --mm-blur-glass: 14px;
+  --mm-veil: rgba(255, 248, 245, 0.55);        /* velo claro translúcido */
+  --mm-veil-low: rgba(255, 248, 245, 0.72);    /* gama baja: blur 6px */
+  --mm-veil-solid: rgba(255, 248, 245, 0.94);  /* sin blur / transparencia reducida */
+
+  /* — Tamaños de control y íconos — */
+  --mm-control-sm: 2rem;     /* 32px: chips, tablas y filtros densos */
+  --mm-control-md: 2.5rem;    /* 40px: tamaño por defecto (zona táctil 44px con --mm-hit-min) */
+  --mm-control-lg: 3rem;      /* 48px: CTA de página y hojas de acceso */
+  --mm-hit-min: 44px;        /* zona táctil mínima: se amplía con ::after, no con el alto visible */
+  --mm-icon-sm: 16px; --mm-icon-md: 20px; --mm-icon-lg: 24px;
+
+  /* — z-index (escala única; reemplaza 15+ literales) — */
+  --mm-z-map: 1;       --mm-z-raised: 2;    --mm-z-controls: 20;
+  --mm-z-sticky: 40;   --mm-z-overlay: 80;  --mm-z-nav: 90;
+  --mm-z-modal: 100;   --mm-z-toast: 110;   --mm-z-cookie: 120;
+
+  /* — Derivados B0 (v1.0.0): quitan los últimos literales de color de los componentes — */
+  --mm-white: #FFFFFF;                          /* tinta sobre fondos oscuros/saturados */
+  --mm-scrim: rgba(15, 23, 42, 0.5);            /* velo oscuro del modal de Admin/Locals */
+  --mm-glass-bg: rgba(255, 255, 255, 0.65);     /* mm-card--glass */
+  --mm-glass-border: rgba(255, 255, 255, 0.7);
+  --mm-hover-on-dark: rgba(255, 255, 255, 0.14);
+  --mm-success-800: #166534;                    /* hover success / texto de insignia success */
+  --mm-warning-800: #78350F;                    /* hover warning */
+  --mm-danger-700: #991B1B;                     /* hover danger */
+  --mm-danger-bg-soft: #FFF5F5;                 /* fondo de campo con error */
+  --mm-success-ink: #14532D;                    /* texto de mm-alert por tono */
+  --mm-info-ink: #1E3A8A;
+  --mm-warning-ink: #78350F;
+  --mm-danger-ink: #7F1D1D;
+  --mm-logo-yellow: #F4C257;                    /* logo oficial (no usar fuera del logo) */
+  --mm-logo-ink: #4F401B;
+
+  /* — Movimiento — */
+  --mm-dur-fast: 120ms; --mm-dur-base: 180ms; --mm-dur-slow: 280ms;
+  --mm-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --mm-dur-fast: 0.01ms; --mm-dur-base: 0.01ms; --mm-dur-slow: 0.01ms; }
+}
+/* ==== fin mm-tokens.css ==== */

@@ -1,0 +1,24 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Field — .mm-field + .mm-input / .mm-textarea · etiqueta SIEMPRE visible; el placeholder no la sustituye.
+   Los atributos extra (autocomplete, inputmode, placeholder, data-*) van al <input>.
+   Uso: <twig:Mm:Field name="email" label="Correo" type="email" :error="errors.email" autocomplete="email" /> #}
+{% props name, label, type = 'text', value = null, help = null, error = null, required = false, icon = null, size = 'md', id = null %}
+{% set fid = id ?? ('mm-f-' ~ name) %}
+{% set described = [help ? fid ~ '-help' : null, error ? fid ~ '-err' : null]|filter(v => v)|join(' ') %}
+<div class="mm-field{{ error ? ' mm-field--invalid' : '' }}">
+    <label class="mm-label" for="{{ fid }}">{{ label }}{% if required %}<span class="mm-req" aria-hidden="true">*</span>{% endif %}</label>
+    {% if type == 'textarea' %}
+        <textarea {{ attributes.defaults({id: fid, name: name, class: 'mm-textarea', required: required ? true : null, 'aria-invalid': error ? 'true' : null, 'aria-describedby': described ?: null}) }}>{{ value }}</textarea>
+    {% else %}
+        {% set input %}
+            <input {{ attributes.defaults({id: fid, name: name, type: type, value: value, class: 'mm-input' ~ (size == 'sm' ? ' mm-input--sm' : ''), required: required ? true : null, 'aria-invalid': error ? 'true' : null, 'aria-describedby': described ?: null}) }}>
+        {% endset %}
+        {% if icon %}
+            <div class="mm-ctrl"><twig:Mm:Icon :name="icon" />{{ input }}</div>
+        {% else %}
+            {{ input }}
+        {% endif %}
+    {% endif %}
+    {% if help %}<span class="mm-help" id="{{ fid }}-help">{{ help }}</span>{% endif %}
+    {% if error %}<span class="mm-error" id="{{ fid }}-err" role="alert"><twig:Mm:Icon name="circle-alert" size="sm" />{{ error }}</span>{% endif %}
+</div>

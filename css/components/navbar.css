@@ -1,0 +1,8 @@
+/* MM-DS v1.0.0 · components/navbar.css · 16. Navbar pública (≥ 1024 px) · NO editar en la app */
+.mm-navbar{display:flex;align-items:center;gap:1rem;background:var(--mm-surface);padding:.6rem 1.25rem;border-radius:var(--mm-radius-lg);box-shadow:var(--mm-shadow-xs);border:1px solid var(--mm-border)}
+.mm-navbar__logo{display:flex;align-items:center;gap:.5rem;font-family:var(--mm-font-body);font-weight:var(--mm-font-weight-bold);color:var(--mm-text-strong);white-space:nowrap}
+.mm-navbar__logo i{width:30px;height:30px;border-radius:10px;background:var(--mm-brand-500);display:block}
+.mm-navbar__search{flex:1;max-width:520px}
+.mm-navbar__nav{display:flex;gap:.25rem;margin-left:auto;align-items:center}
+.mm-navbar__link{padding:.45rem .85rem;border-radius:var(--mm-radius-full);font-weight:var(--mm-font-weight-semibold);font-size:var(--mm-text-sm);color:var(--mm-text-muted);text-decoration:none;border-bottom:3px solid transparent}
+.mm-navbar__link[aria-current="page"]{color:var(--mm-text-strong);border-bottom-color:var(--mm-brand-700);border-radius:0}

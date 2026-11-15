@@ -1,0 +1,9 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:IconButton — .mm-icon-btn · «label» es obligatorio (aria-label).
+   Uso: <twig:Mm:IconButton icon="heart" label="Quitar de favoritos" :pressed="true" /> #}
+{% props icon, label, variant = 'ghost', size = 'md', pressed = null %}
+{% set cls = 'mm-icon-btn' ~ (variant != 'ghost' ? ' mm-icon-btn--' ~ variant : '') ~ (size == 'sm' ? ' mm-icon-btn--sm' : '') %}
+{% set tag = attributes.all.href is defined ? 'a' : 'button' %}
+<{{ tag }} {{ attributes.defaults({class: cls, 'aria-label': label, 'aria-pressed': pressed is null ? null : (pressed ? 'true' : 'false')}).defaults(tag == 'button' ? {type: 'button'} : {}) }}>
+    <twig:Mm:Icon :name="icon" />
+</{{ tag }}>

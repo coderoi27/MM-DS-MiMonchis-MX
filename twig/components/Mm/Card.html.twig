@@ -1,0 +1,11 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Card — .mm-card · variant: surface (por defecto, sin blur; listas), glass (un solo panel por pantalla), stat.
+   Bloques: media · content (por defecto) · footer. Nunca anidar glass dentro de glass.
+   Uso: <twig:Mm:Card interactive tag="a" href="…"><twig:block name="media">…</twig:block>…</twig:Mm:Card> #}
+{% props variant = 'surface', interactive = false, selected = false, tag = 'article' %}
+{% set cls = 'mm-card' ~ (variant in ['glass'] ? ' mm-card--glass' : '') ~ (interactive ? ' mm-card--interactive' : '') ~ (selected ? ' mm-card--selected' : '') %}
+<{{ tag }} {{ attributes.defaults({class: cls}) }}>
+    {% block media %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+</{{ tag }}>

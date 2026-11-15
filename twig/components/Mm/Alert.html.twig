@@ -1,0 +1,13 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Alert — .mm-alert · tone: success|info|warning|danger. danger usa role="alert"; el resto role="status".
+   Los flashes de Symfony se pintan UNA sola vez, en el shell. Uso: <twig:Mm:Alert tone="danger" title="No se guardó">Revisa los campos marcados.</twig:Mm:Alert> #}
+{% props tone = 'info', title = null, dismissible = false %}
+{% set icons = {success: 'circle-check', info: 'info', warning: 'triangle-alert', danger: 'circle-alert'} %}
+<div {{ attributes.defaults({class: 'mm-alert mm-alert--' ~ tone, role: tone == 'danger' ? 'alert' : 'status'}) }}>
+    <twig:Mm:Icon :name="icons[tone]" />
+    <div class="mm-alert__body">
+        {% if title %}<span class="mm-alert__title">{{ title }}</span>{% endif %}
+        <span>{% block content %}{% endblock %}</span>
+    </div>
+    {% if dismissible %}<button class="mm-icon-btn mm-icon-btn--sm" aria-label="Cerrar aviso" data-action="click->mm-alert#dismiss" type="button"><twig:Mm:Icon name="x" /></button>{% endif %}
+</div>

@@ -1,0 +1,6 @@
+/* MM-DS v1.0.0 · components/page-header.css · 15. Encabezado de página · NO editar en la app */
+.mm-page-header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-end;margin-bottom:1.25rem}
+.mm-page-header__eyebrow{font-size:var(--mm-text-xs);font-weight:var(--mm-font-weight-semibold);letter-spacing:0;text-transform:none;color:var(--mm-text-brand);margin-bottom:.25rem}
+.mm-page-header h1,.mm-page-header h2{font-size:var(--mm-text-2xl);font-weight:var(--mm-font-weight-bold)}
+.mm-page-header p{color:var(--mm-text-muted);font-size:var(--mm-text-sm);margin-top:.35rem;max-width:62ch}
+.mm-page-header__actions{display:flex;gap:.5rem;flex-wrap:wrap}

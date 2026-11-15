@@ -1,0 +1,8 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Badge — .mm-badge · estado NO interactivo. tone: neutral|brand|success|warning|danger|info. Nunca es el único indicador.
+   Uso: <twig:Mm:Badge tone="success" icon="circle-check">Publicado</twig:Mm:Badge> #}
+{% props tone = 'neutral', icon = null %}
+<span {{ attributes.defaults({class: 'mm-badge' ~ (tone != 'neutral' ? ' mm-badge--' ~ tone : '')}) }}>
+    {%- if icon %}<twig:Mm:Icon :name="icon" />{% endif -%}
+    {%- block content %}{% endblock -%}
+</span>

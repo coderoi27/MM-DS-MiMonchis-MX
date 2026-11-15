@@ -1,0 +1,7 @@
+/* MM-DS v1.0.0 · components/chip.css · 7. Chip · NO editar en la app */
+.mm-chip{position:relative;display:inline-flex;align-items:center;gap:.4rem;min-height:var(--mm-control-sm);padding:0 .9rem;border-radius:var(--mm-radius-full);border:1.5px solid var(--mm-border-strong);background:var(--mm-surface);color:var(--mm-text-strong);font:inherit;font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-semibold);cursor:pointer;white-space:nowrap;max-width:100%;transition:background-color var(--mm-dur-fast)}
+.mm-chip:hover,.mm-chip.is-hover{background:var(--mm-slate-50);border-color:var(--mm-slate-500)}
+.mm-chip[aria-pressed="true"],.mm-chip[aria-current="true"]{background:var(--mm-brand-100);border-color:var(--mm-brand-700);color:var(--mm-brand-800)}
+.mm-chip--distance{color:var(--mm-info-700)}
+.mm-chip .lbl{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mm-chip:disabled{opacity:.5;cursor:not-allowed}

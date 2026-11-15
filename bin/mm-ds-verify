@@ -1,0 +1,159 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+/* Verifica el paquete (sin argumentos) o una app (<public|admin|locals|ruta>). Falla (exit 1) si hay deriva.
+   - mm-ds.lock vacío o inexistente = «sin sincronizar» (NO es error).
+   Opciones: --quiet (solo errores y una línea final) · --allow-outdated (acepta un lock de una versión anterior). */
+require __DIR__ . '/_lib.php';
+$args = array_slice($argv, 1);
+$quiet = in_array('--quiet', $args, true);
+$allowOld = in_array('--allow-outdated', $args, true);
+$args = array_values(array_filter($args, fn($a) => !str_starts_with($a, '--')));
+
+$root = mmds_root();
+$errors = [];
+$say = function (string $s) use ($quiet) { if (!$quiet) echo $s . "\n"; };
+$fail = function (string $s) use (&$errors) { $errors[] = $s; };
+
+/* ---------------- verificación del paquete ---------------- */
+function verify_package(string $root, callable $fail, callable $say): array {
+    $m = mmds_load_manifest($root);
+    $version = trim((string)@file_get_contents($root . '/VERSION'));
+    if ($version !== $m['version']) $fail("VERSION ($version) ≠ manifest.json ({$m['version']}); ejecuta bin/mm-ds-manifest");
+
+    $actual = mmds_package_files($root);
+    foreach ($m['files'] as $rel => $sha) {
+        if (!is_file("$root/$rel")) { $fail("falta $rel"); continue; }
+        if (mmds_sha("$root/$rel") !== $sha) $fail("huella distinta: $rel (¿se editó sin ejecutar bin/mm-ds-manifest?)");
+    }
+    foreach (array_diff($actual, array_keys($m['files'])) as $extra) $fail("archivo fuera del manifiesto: $extra");
+    $say('  ✓ huellas SHA-256 de ' . count($m['files']) . ' archivos');
+
+    // tokens
+    $tokens = (string)@file_get_contents("$root/tokens/mm-tokens.css");
+    $need = ['--mm-font-weight-regular' => '400', '--mm-font-weight-medium' => '500', '--mm-font-weight-semibold' => '600', '--mm-font-weight-bold' => '700',
+        '--mm-danger-600' => '#B91C1C', '--mm-info-700' => '#1D4ED8', '--mm-brand-500' => '#F27F0D', '--mm-on-brand' => '#1F1300'];
+    foreach ($need as $name => $val) {
+        if (!preg_match('/' . preg_quote($name, '/') . '\s*:\s*' . preg_quote($val, '/') . '\b/i', $tokens)) $fail("token $name debe valer $val");
+    }
+    foreach (['--mm-font-display', '--mm-weight-extrabold'] as $gone) if (str_contains($tokens, $gone . ':')) $fail("token retirado presente: $gone");
+    $say('  ✓ tokens: escala de pesos 400/500/600/700, P11 (#B91C1C, #1D4ED8), marca');
+
+    // CSS y Twig: sin colores literales, sin pesos 800/900, sin clases de color de Tailwind por defecto
+    $defined = [];
+    preg_match_all('/(--mm-[a-z0-9-]+)\s*:/', $tokens, $d); $defined = array_flip($d[1]);
+    $used = [];
+    $scan = array_filter($actual, fn($f) => preg_match('~^(css/.*\.css|twig/components/Mm/.*\.twig)$~', $f));
+    foreach ($scan as $rel) {
+        $raw = (string)file_get_contents("$root/$rel");
+        $src = mmds_color_free($raw);
+        if (preg_match('/#[0-9a-fA-F]{3,8}\b/', $src, $h)) $fail("color literal {$h[0]} en $rel (usa var(--mm-…))");
+        if (preg_match('/\b(rgba?|hsla?)\(/i', $src, $h)) $fail("color literal {$h[1]}() en $rel (usa var(--mm-…))");
+        if (str_ends_with($rel, '.css')) {
+            if (preg_match('/font-weight\s*:\s*(800|900)\b/', $src)) $fail("peso 800/900 prohibido en $rel");
+            preg_match_all('/(--mm-[a-z0-9-]+)\s*:/', $src, $own); foreach ($own[1] as $o) $defined[$o] = 1;
+            preg_match_all('/var\((--mm-[a-z0-9-]+)\s*\)/', $src, $u); // var(--x, fallback) = valor de ejecución (p. ej. --mm-drag), no se exige en tokens foreach ($u[1] as $x) $used[$x][] = $rel;
+        } else {
+            if (preg_match('/\b(text|bg|border|from|to|via|ring)-(orange|gray|slate|red|blue|green|amber|yellow|rose|zinc|neutral|stone)-\d{2,3}\b/', $src, $h)) $fail("clase de color por defecto de Tailwind ({$h[0]}) en $rel");
+            if (preg_match_all('/<twig:Mm:([A-Za-z]+)/', $src, $refs)) foreach (array_unique($refs[1]) as $c) if (!is_file("$root/twig/components/Mm/$c.html.twig")) $fail("$rel usa <twig:Mm:$c> que no existe");
+        }
+    }
+    foreach ($used as $var => $files) if (!isset($defined[$var])) $fail("var($var) sin definir (usada en " . implode(', ', array_unique($files)) . ')');
+    $say('  ✓ sin colores literales fuera de tokens/, sin pesos 800/900, sin clases de color de Tailwind, todo var(--mm-*) definido');
+
+    // índice de componentes
+    $idx = (string)@file_get_contents("$root/css/mm-components.css");
+    preg_match_all('~components/([a-z-]+)\.css~', $idx, $im);
+    $files = array_map(fn($f) => basename($f, '.css'), glob("$root/css/components/*.css"));
+    foreach (array_diff($files, $im[1]) as $x) $fail("css/components/$x.css no está en mm-components.css");
+    foreach (array_diff($im[1], $files) as $x) $fail("mm-components.css importa $x.css que no existe");
+    $say('  ✓ mm-components.css importa los ' . count($files) . ' archivos de css/components/');
+
+    // íconos
+    $onDisk = array_map(fn($f) => basename($f, '.svg'), glob("$root/icons/lucide/*.svg"));
+    sort($onDisk);
+    if ($onDisk !== ($m['icons'] ?? [])) $fail('la lista «icons» del manifiesto no coincide con icons/lucide/*.svg');
+    foreach (glob("$root/icons/lucide/*.svg") as $f) if (!str_contains((string)file_get_contents($f), 'currentColor')) $fail('ícono sin currentColor: ' . basename($f));
+    if (!is_file("$root/icons/lucide/LICENSE")) $fail('falta icons/lucide/LICENSE');
+    $say('  ✓ ' . count($onDisk) . ' íconos Lucide (currentColor) + licencia ISC');
+
+    // fuente y marca
+    if (!glob("$root/fonts/*.woff2")) $fail('falta la fuente Outfit (fonts/*.woff2)');
+    if (!is_file("$root/fonts/OFL.txt")) $fail('falta fonts/OFL.txt');
+    $base = (string)@file_get_contents("$root/css/mm-base.css");
+    if (preg_match('~(googleapis|gstatic)~', $base)) $fail('mm-base.css apunta a Google Fonts');
+    foreach (glob("$root/brand/*provisional*.svg") as $f) if (stripos((string)file_get_contents($f), 'PROVISIONAL') === false) $fail('falta la marca «PROVISIONAL» en ' . basename($f));
+    foreach (['mm-logo-horizontal-color.svg', 'mm-logo-horizontal-white-provisional.svg', 'mm-isotipo-provisional.svg'] as $b) if (!is_file("$root/brand/$b")) $fail("falta brand/$b");
+    $say('  ✓ Outfit autoalojada + OFL, marca (la blanca y el isotipo, marcados «provisional»)');
+
+    // la vitrina debe cargar los CSS del paquete (no copias internas)
+    $vit = dirname($root, 2) . '/Obsidian/17 Archivos de Claude/Diseño/04 MM-DS v1 vitrina.html';
+    if (is_file($vit)) {
+        $h = (string)file_get_contents($vit);
+        $ok = true;
+        if (!preg_match('~<link[^>]+Sistemas/MM-DS/tokens/mm-tokens\.css~', $h) || !preg_match('~<link[^>]+Sistemas/MM-DS/css/mm-components\.css~', $h)) { $fail('la vitrina no enlaza tokens/mm-tokens.css y css/mm-components.css del paquete'); $ok = false; }
+        if (preg_match('/--mm-brand-500\s*:/', $h)) { $fail('la vitrina vuelve a definir tokens --mm-* (debe usar los del paquete)'); $ok = false; }
+        if ($ok) $say('  ✓ la vitrina carga los CSS del paquete (sin copias internas de tokens)');
+    }
+    return $m;
+}
+
+/* ---------------- verificación de una app ---------------- */
+function verify_app(array $m, string $key, string $app, bool $allowOld, callable $fail0, callable $say): string {
+    $n = 0;
+    $fail = function (string $s) use ($fail0, &$n) { $n++; $fail0($s); };
+    if (!is_dir($app)) { $fail("no existe la carpeta de la app: $app"); return 'error'; }
+    $lockFile = $app . '/mm-ds.lock';
+    if (!is_file($lockFile) || trim((string)file_get_contents($lockFile)) === '') {
+        $say("  ○ $key: mm-ds.lock vacío → sin sincronizar (no es error). Ejecuta bin/mm-ds-sync $key cuando A1/L1/P1 lo pidan.");
+        return 'sin sincronizar';
+    }
+    $lock = json_decode((string)file_get_contents($lockFile), true);
+    if (!is_array($lock) || !isset($lock['version'], $lock['files'])) { $fail("$key: mm-ds.lock ilegible (JSON inválido)"); return 'error'; }
+    if ($lock['version'] !== $m['version']) {
+        if ($allowOld) $say("  ! $key: lock en v{$lock['version']}, paquete en v{$m['version']} (permitido)");
+        else $fail("$key: sincronizado con v{$lock['version']} pero el paquete es v{$m['version']}; ejecuta bin/mm-ds-sync $key");
+    }
+    foreach ($lock['files'] as $t => $sha) {
+        $f = "$app/$t";
+        if (!is_file($f)) { $fail("$key: falta $t"); continue; }
+        if (mmds_sha($f) !== $sha) $fail("$key: deriva en $t (editado a mano; vuelve a sincronizar)");
+    }
+    // archivos ajenos dentro de las carpetas gestionadas
+    $managed = [];
+    foreach ($m['targets'] as [, $to]) $managed[] = $to;
+    foreach ($managed as $dir) {
+        if (!is_dir("$app/$dir")) continue;
+        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("$app/$dir", FilesystemIterator::SKIP_DOTS));
+        foreach ($it as $f) {
+            if (!$f->isFile() || $f->getFilename() === '.DS_Store') continue;
+            $rel = str_replace('\\', '/', substr($f->getPathname(), strlen($app) + 1));
+            if (!isset($lock['files'][$rel])) $fail("$key: archivo ajeno dentro de una carpeta gestionada: $rel");
+        }
+    }
+    if ($n === 0) $say("  ✓ $key: v{$lock['version']}, " . count($lock['files']) . ' archivos sin deriva');
+    return 'sincronizado';
+}
+
+if (!$args) {
+    $say("MM-DS · verificación del paquete ($root)");
+    $m = verify_package($root, $fail, $say);
+    $label = 'paquete v' . $m['version'];
+} else {
+    $m = mmds_load_manifest($root);
+    $say("MM-DS v{$m['version']} · verificación de app");
+    $states = [];
+    foreach ($args as $a) {
+        [$key, $app] = mmds_resolve_app($m, $a, $root);
+        $states[$key] = verify_app($m, $key, $app, $allowOld, $fail, $say);
+    }
+    $label = implode(', ', array_map(fn($k, $s) => "$k: $s", array_keys($states), $states));
+}
+
+if ($errors) {
+    fwrite(STDERR, "✗ MM-DS: " . count($errors) . " problema(s)\n");
+    foreach ($errors as $e) fwrite(STDERR, "  ✗ $e\n");
+    exit(1);
+}
+echo "✓ MM-DS OK — $label\n";
+exit(0);

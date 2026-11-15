@@ -1,0 +1,6 @@
+/* MM-DS v1.0.0 · components/pagination.css · 14. Paginación · NO editar en la app */
+.mm-pagination{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;justify-content:space-between;font-size:var(--mm-text-sm);color:var(--mm-text-muted)}
+.mm-pagination .row{gap:.5rem}
+.mm-pg{min-width:var(--mm-control-sm);height:var(--mm-control-sm);padding:0 .5rem;display:inline-grid;place-items:center;border-radius:var(--mm-radius-full);border:1.5px solid transparent;background:none;font:inherit;font-weight:var(--mm-font-weight-semibold);color:var(--mm-text-strong);cursor:pointer}
+.mm-pg:hover{background:var(--mm-slate-100)}
+.mm-pg[aria-current="page"]{background:var(--mm-brand-100);border-color:var(--mm-brand-700);color:var(--mm-brand-800)}

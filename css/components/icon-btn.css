@@ -1,0 +1,12 @@
+/* MM-DS v1.0.0 · components/icon-btn.css · 2. Botón de ícono · NO editar en la app */
+/* 2. Botón de ícono */
+.mm-icon-btn{position:relative;display:inline-grid;place-items:center;width:var(--mm-control-md);height:var(--mm-control-md);border-radius:var(--mm-radius-full);border:2px solid transparent;background:transparent;color:var(--mm-text-strong);cursor:pointer;padding:0;transition:background-color var(--mm-dur-fast) var(--mm-ease)}
+.mm-icon-btn--sm{width:var(--mm-control-sm);height:var(--mm-control-sm)}
+.mm-icon-btn:hover,.mm-icon-btn.is-hover{background:var(--mm-slate-100)}
+.mm-icon-btn--solid{background:var(--mm-surface);box-shadow:var(--mm-shadow-sm)}
+.mm-icon-btn--brand{background:var(--mm-brand-500);color:var(--mm-on-brand);box-shadow:var(--mm-shadow-brand)}
+.mm-icon-btn--brand:hover{background:var(--mm-brand-hover)}
+.mm-icon-btn--danger{color:var(--mm-danger-600)}
+.mm-icon-btn--danger:hover{background:var(--mm-danger-bg)}
+.mm-icon-btn[aria-pressed="true"]{background:var(--mm-brand-100);color:var(--mm-brand-800)}
+.mm-icon-btn.is-focus{outline:3px solid var(--mm-focus);outline-offset:2px}

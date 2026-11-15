@@ -1,0 +1,12 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Table — .mm-table-wrap › .mm-table · «caption» obligatorio (solo lectores de pantalla). Bloques: head (<tr> de <th scope="col">) · content (<tbody>).
+   Números: class="num"; acciones: class="act". Ordenamiento: aria-sort en el <th>. Vacía → Mm:Empty.
+   Uso: <twig:Mm:Table caption="Locales publicados" dense> <twig:block name="head"><tr>…</tr></twig:block> … #}
+{% props caption, dense = false %}
+<div class="mm-table-wrap">
+    <table {{ attributes.defaults({class: 'mm-table' ~ (dense ? ' mm-table--dense' : '')}) }}>
+        <caption class="mm-sr-only">{{ caption }}</caption>
+        <thead>{% block head %}{% endblock %}</thead>
+        <tbody>{% block content %}{% endblock %}</tbody>
+    </table>
+</div>

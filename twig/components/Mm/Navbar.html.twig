@@ -1,0 +1,16 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Navbar — .mm-navbar · navbar pública en escritorio (≥ 1024 px; por debajo, Mm:Tabbar). Sticky con z-index --mm-z-nav.
+   «items» = [{key, label, href}]; «current» marca aria-current="page". Bloques: search · location · actions (campana, favoritos, avatar/«Entrar»).
+   El logo sale de assets/mm-ds/brand/ (AssetMapper). Uso: <twig:Mm:Navbar :items="nav" current="explorar" homeHref="/"> … #}
+{% props items = [], current = null, homeHref = '/' %}
+<header {{ attributes.defaults({class: 'mm-navbar'}) }}>
+    <a class="mm-navbar__logo" href="{{ homeHref }}"><img src="{{ asset('mm-ds/brand/mm-logo-horizontal-color.svg') }}" alt="Mi Monchis" class="mm-logo"></a>
+    <div class="mm-navbar__search">{% block search %}{% endblock %}</div>
+    {% block location %}{% endblock %}
+    <nav class="mm-navbar__nav" aria-label="Principal">
+        {% for item in items %}
+            <a class="mm-navbar__link" href="{{ item.href }}"{{ item.key == current ? ' aria-current="page"' : '' }}>{{ item.label }}</a>
+        {% endfor %}
+        {% block actions %}{% endblock %}
+    </nav>
+</header>

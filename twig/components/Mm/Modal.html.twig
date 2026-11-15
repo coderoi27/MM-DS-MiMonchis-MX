@@ -1,0 +1,13 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Modal — .mm-modal · <dialog> nativo (foco atrapado, Esc, inert de fondo). Se abre con dialogEl.showModal().
+   Admin y Locals: velo oscuro (--mm-scrim). En Public usar Mm:Sheet. Confirmación destructiva: botón danger que nombra lo que se borra.
+   Bloques: content · footer. Uso: <twig:Mm:Modal id="del" title="¿Eliminar «Taquería La Esquina»?"> … #}
+{% props id, title %}
+<dialog {{ attributes.defaults({id: id, class: 'mm-modal', 'aria-labelledby': id ~ '-title'}) }}>
+    <div class="mm-modal__head">
+        <h2 class="mm-modal__title" id="{{ id }}-title">{{ title }}</h2>
+        <form method="dialog"><button class="mm-icon-btn mm-icon-btn--sm" aria-label="Cerrar"><twig:Mm:Icon name="x" /></button></form>
+    </div>
+    <div class="mm-modal__body">{% block content %}{% endblock %}</div>
+    {% block footer %}{% endblock %}
+</dialog>

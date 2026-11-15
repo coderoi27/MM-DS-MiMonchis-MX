@@ -1,0 +1,20 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Sheet — .mm-sheet-host › .mm-sheet · hoja inferior en móvil (< 768 px) y modal centrado en escritorio, con el fondo difuminado.
+   Abre/cierra el Stimulus «mm-sheet» (P5): añade .is-open al host. «data-mm-gate="fav|review|photo|profile"» en un control abre la hoja con contexto.
+   Alternativas sin blur: ya en mm-components.css (@supports, prefers-reduced-transparency, data-perf="low").
+   Uso: <twig:Mm:Sheet id="gate" title="Inicia sesión para guardar tus favoritos" context="Favoritos" contextIcon="heart"> … #}
+{% props id, title, subtitle = null, context = null, contextIcon = null %}
+<div class="mm-sheet-host" data-controller="mm-sheet" id="{{ id }}-host">
+    <div {{ attributes.defaults({class: 'mm-sheet', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': id ~ '-title', id: id}) }}>
+        <button class="mm-sheet__grip" tabindex="-1" aria-hidden="true" data-grip type="button"></button>
+        <div class="mm-sheet__head" data-grip>
+            <div>
+                {% if context %}<span class="mm-ctx">{% if contextIcon %}<twig:Mm:Icon :name="contextIcon" />{% endif %}{{ context }}</span>{% endif %}
+                <h2 class="mm-sheet__title" id="{{ id }}-title" tabindex="-1">{{ title }}</h2>
+                {% if subtitle %}<p class="mm-sheet__sub">{{ subtitle }}</p>{% endif %}
+            </div>
+            <button class="mm-icon-btn mm-icon-btn--sm mm-sheet__close" aria-label="Cerrar" data-sheet-close type="button"><twig:Mm:Icon name="x" /></button>
+        </div>
+        <div class="mm-sheet__body">{% block content %}{% endblock %}</div>
+    </div>
+</div>

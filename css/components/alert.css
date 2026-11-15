@@ -1,0 +1,9 @@
+/* MM-DS v1.0.0 · components/alert.css · 12. Aviso · NO editar en la app */
+.mm-alert{display:flex;gap:.75rem;align-items:flex-start;padding:.85rem 1rem;border-radius:var(--mm-radius-md);border:1px solid var(--bd);background:var(--bg);color:var(--fg);font-size:var(--mm-text-sm)}
+.mm-alert>.mm-icon{margin-top:1px}
+.mm-alert__body{flex:1;display:grid;gap:.15rem;min-width:0}
+.mm-alert__title{font-weight:var(--mm-font-weight-semibold)}
+.mm-alert--success{--bg:var(--mm-success-bg);--bd:var(--mm-success-border);--fg:var(--mm-success-ink)}
+.mm-alert--info{--bg:var(--mm-info-bg);--bd:var(--mm-info-border);--fg:var(--mm-info-ink)}
+.mm-alert--warning{--bg:var(--mm-warning-bg);--bd:var(--mm-warning-border);--fg:var(--mm-warning-800)}
+.mm-alert--danger{--bg:var(--mm-danger-bg);--bd:var(--mm-danger-border);--fg:var(--mm-danger-ink)}

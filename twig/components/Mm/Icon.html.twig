@@ -1,0 +1,4 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Icon — .mm-icon · Lucide vía symfony/ux-icons. Uso: <twig:Mm:Icon name="heart" size="sm" /> #}
+{% props name, size = 'md' %}
+{{ ux_icon('lucide:' ~ name, {class: 'mm-icon' ~ (size != 'md' ? ' mm-icon--' ~ size : ''), 'aria-hidden': 'true'}) }}

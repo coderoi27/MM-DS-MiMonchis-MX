@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+/* Copia el paquete a una app y escribe su mm-ds.lock.
+   Uso: bin/mm-ds-sync <public|admin|locals|ruta> [--dry-run]
+   Rutas en la app: assets/mm-ds/{tokens,css,fonts,icons,brand}/… · templates/components/Mm/… · mm-ds.lock (raíz). */
+require __DIR__ . '/_lib.php';
+$args = array_slice($argv, 1);
+$dry = in_array('--dry-run', $args, true);
+$args = array_values(array_filter($args, fn($a) => $a !== '--dry-run'));
+if (count($args) !== 1) { fwrite(STDERR, "Uso: bin/mm-ds-sync <public|admin|locals|ruta> [--dry-run]\n"); exit(1); }
+
+$root = mmds_root();
+// 1) el paquete debe estar íntegro antes de copiarlo
+passthru(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__DIR__ . '/mm-ds-verify') . ' --quiet', $rc);
+if ($rc !== 0) { fwrite(STDERR, "✗ El paquete no pasa mm-ds-verify; no se sincroniza. Corrige y ejecuta bin/mm-ds-manifest.\n"); exit(1); }
+
+$m = mmds_load_manifest($root);
+[$key, $app] = mmds_resolve_app($m, $args[0], $root);
+if (!is_dir($app)) { fwrite(STDERR, "✗ No existe la carpeta de la app: $app\n"); exit(1); }
+
+// 2) lock previo (para borrar archivos que el paquete ya no trae)
+$lockFile = $app . '/mm-ds.lock';
+$old = [];
+if (is_file($lockFile) && trim((string)file_get_contents($lockFile)) !== '') {
+    $j = json_decode((string)file_get_contents($lockFile), true);
+    if (is_array($j) && isset($j['files'])) $old = array_keys($j['files']);
+}
+
+// 3) copia
+$files = [];
+$copied = 0;
+foreach ($m['files'] as $rel => $sha) {
+    $t = mmds_target($m, $rel, $key);
+    if ($t === null) continue;
+    $dst = $app . '/' . $t;
+    $files[$t] = $sha;
+    if (is_file($dst) && mmds_sha($dst) === $sha) continue;
+    if (!$dry) {
+        if (!is_dir(dirname($dst))) mkdir(dirname($dst), 0775, true);
+        copy($root . '/' . $rel, $dst);
+    }
+    $copied++;
+    echo ($dry ? '  (simulación) ' : '  + ') . $t . "\n";
+}
+$removed = 0;
+foreach (array_diff($old, array_keys($files)) as $stale) {
+    if (is_file($app . '/' . $stale)) { if (!$dry) unlink($app . '/' . $stale); echo ($dry ? '  (simulación) ' : '  - ') . $stale . "\n"; $removed++; }
+}
+ksort($files, SORT_STRING);
+if (!$dry) {
+    file_put_contents($lockFile, json_encode(['package' => 'MM-DS', 'version' => $m['version'], 'files' => $files], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
+}
+printf("%s MM-DS v%s → %s: %d archivos nuevos o cambiados, %d retirados, %d en total.\n", $dry ? '(simulación)' : '✓', $m['version'], $key, $copied, $removed, count($files));
+if (!$dry) echo "  Siguiente: commit en la app con «MM-DS v{$m['version']}» y bin/mm-ds-verify $key.\n";

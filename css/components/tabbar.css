@@ -1,0 +1,9 @@
+/* MM-DS v1.0.0 · components/tabbar.css · 17. Barra inferior móvil (< 1024 px) · NO editar en la app */
+.mm-tabbar{display:grid;grid-template-columns:repeat(6,1fr);align-items:end;background:var(--mm-surface);border-top:1px solid var(--mm-border);padding:.35rem .25rem calc(.35rem + env(safe-area-inset-bottom));min-height:64px;position:relative}
+.mm-tabbar__item{display:grid;justify-items:center;gap:2px;min-height:48px;padding:.2rem;border:0;background:none;font:inherit;font-size:var(--mm-text-xs);font-weight:var(--mm-font-weight-medium);color:var(--mm-text-muted);cursor:pointer;border-radius:12px;position:relative}
+.mm-tabbar__item[aria-current="page"]{color:var(--mm-brand-700)}
+.mm-tabbar__item[aria-current="page"] .mm-icon{fill:var(--mm-brand-100)}
+.mm-tabbar__fab{display:grid;justify-items:center;gap:2px;align-self:start;margin-top:-22px}
+.mm-tabbar__fab .mm-icon-btn{width:56px;height:56px;border:4px solid var(--mm-surface)}
+.mm-tabbar__fab span{font-size:var(--mm-text-xs);font-weight:var(--mm-font-weight-medium);color:var(--mm-text-muted)}
+.mm-tabbar__count{position:absolute;top:2px;right:calc(50% - 20px);min-width:18px;height:18px;border-radius:99px;background:var(--mm-brand-700);color:var(--mm-white);font-size:11px;font-weight:var(--mm-font-weight-semibold);display:grid;place-items:center;padding:0 4px}

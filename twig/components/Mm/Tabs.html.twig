@@ -1,0 +1,11 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Tabs — .mm-tabs · solo la lista de pestañas; cada panel lo escribe la vista: <div class="mm-panel" role="tabpanel" id="panel-ID" aria-labelledby="tab-ID" hidden>.
+   «tabs» = [{id, label}]; navegación con flechas por Stimulus. Variante segmented = pill (fuentes del mapa).
+   Uso: <twig:Mm:Tabs label="Perfil del local" :tabs="[{id:'datos',label:'Datos'},{id:'horarios',label:'Horarios'}]" active="datos" /> #}
+{% props label, tabs, active = null, segmented = false %}
+{% set current = active ?? (tabs|first).id %}
+<div {{ attributes.defaults({class: 'mm-tabs' ~ (segmented ? ' mm-tabs--segmented' : ''), role: 'tablist', 'aria-label': label}) }}>
+    {% for tab in tabs %}
+        <button class="mm-tab" role="tab" type="button" id="tab-{{ tab.id }}" aria-controls="panel-{{ tab.id }}" aria-selected="{{ tab.id == current ? 'true' : 'false' }}"{{ tab.id == current ? '' : ' tabindex="-1"' }}>{{ tab.label }}</button>
+    {% endfor %}
+</div>

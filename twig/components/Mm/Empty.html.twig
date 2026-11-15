@@ -1,0 +1,10 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Empty — .mm-empty · cada lista declara cuál de las cuatro variantes es: first-run | no-results | error | locked. Bloque actions: botón opcional.
+   Uso: <twig:Mm:Empty variant="no-results" icon="search" title="Sin resultados" description="Ningún claim coincide con estos filtros."> … #}
+{% props variant = 'first-run', icon = 'sparkles', title, description = null %}
+<div {{ attributes.defaults({class: 'mm-empty mm-empty--' ~ variant}) }}>
+    <div class="mm-empty__ico"><twig:Mm:Icon :name="icon" size="lg" /></div>
+    <h4>{{ title }}</h4>
+    {% if description %}<p>{{ description }}</p>{% endif %}
+    {% block actions %}{% endblock %}
+</div>

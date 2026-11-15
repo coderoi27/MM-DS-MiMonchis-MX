@@ -1,0 +1,4 @@
+/* MM-DS v1.0.0 · components/popover.css · Apoyo: mm-menu / popover · NO editar en la app */
+.mm-menu{background:var(--mm-surface);border:1px solid var(--mm-border);border-radius:var(--mm-radius-lg);box-shadow:var(--mm-shadow-md);padding:.35rem;display:grid;gap:2px;width:min(100%,260px)}
+.mm-menu button{display:flex;gap:.6rem;align-items:center;min-height:var(--mm-control-md);padding:0 .75rem;border:0;background:none;border-radius:var(--mm-radius-md);font:inherit;font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-medium);color:var(--mm-text-strong);cursor:pointer;text-align:left}
+.mm-menu button:hover{background:var(--mm-slate-100)}

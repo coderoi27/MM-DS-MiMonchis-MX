@@ -1,0 +1,32 @@
+/* MM-DS v1.0.0 · components/btn.css · 1. Botón · NO editar en la app */
+/* 1. Botón */
+.mm-btn{--bg:var(--mm-surface);--fg:var(--mm-text-strong);--bd:var(--mm-border-strong);display:inline-flex;align-items:center;justify-content:center;gap:.5rem;position:relative;min-height:var(--mm-control-md);padding:0 1.25rem;border-radius:var(--mm-radius-full);border:2px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-semibold);line-height:1.2;text-decoration:none;cursor:pointer;transition:background-color var(--mm-dur-fast) var(--mm-ease),box-shadow var(--mm-dur-fast) var(--mm-ease),transform var(--mm-dur-fast) var(--mm-ease);white-space:nowrap}
+.mm-btn--sm{min-height:var(--mm-control-sm);padding:0 1rem}
+.mm-btn--lg{min-height:var(--mm-control-lg);padding:0 1.5rem;font-size:var(--mm-text-base)}
+.mm-btn--primary{--bg:var(--mm-brand-500);--fg:var(--mm-on-brand);--bd:var(--mm-brand-500);box-shadow:var(--mm-shadow-brand)}
+.mm-btn--secondary{--bg:var(--mm-surface);--fg:var(--mm-text-strong);--bd:var(--mm-border-strong)}
+.mm-btn--ghost{--bg:transparent;--fg:var(--mm-text-brand);--bd:transparent}
+.mm-btn--danger{--bg:var(--mm-danger-600);--fg:var(--mm-white);--bd:var(--mm-danger-600)}
+.mm-btn--success{--bg:var(--mm-success-700);--fg:var(--mm-white);--bd:var(--mm-success-700)}
+.mm-btn--warning{--bg:var(--mm-warning-700);--fg:var(--mm-white);--bd:var(--mm-warning-700)}
+.mm-btn--link{--bg:transparent;--fg:var(--mm-link);--bd:transparent;text-decoration:underline;padding:0 .25rem;min-height:auto}
+.mm-btn--primary:hover,.mm-btn--primary.is-hover{--bg:var(--mm-brand-hover);--bd:var(--mm-brand-hover)}
+.mm-btn--primary:active,.mm-btn--primary.is-pressed{--bg:var(--mm-brand-600);--bd:var(--mm-brand-600);transform:translateY(1px);box-shadow:none}
+.mm-btn--secondary:hover,.mm-btn--secondary.is-hover{--bg:var(--mm-slate-50);--bd:var(--mm-slate-500)}
+.mm-btn--secondary:active,.mm-btn--secondary.is-pressed{--bg:var(--mm-slate-100);transform:translateY(1px)}
+.mm-btn--ghost:hover,.mm-btn--ghost.is-hover{--bg:var(--mm-brand-50);--fg:var(--mm-brand-800)}
+.mm-btn--ghost:active,.mm-btn--ghost.is-pressed{--bg:var(--mm-brand-100)}
+.mm-btn--danger:hover,.mm-btn--danger.is-hover{--bg:var(--mm-danger-700);--bd:var(--mm-danger-700)}
+.mm-btn--success:hover,.mm-btn--success.is-hover{--bg:var(--mm-success-800);--bd:var(--mm-success-800)}
+.mm-btn--warning:hover,.mm-btn--warning.is-hover{--bg:var(--mm-warning-800);--bd:var(--mm-warning-800)}
+.mm-btn.is-focus{outline:3px solid var(--mm-focus);outline-offset:2px}
+.mm-btn:disabled,.mm-btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.mm-btn[aria-busy="true"]{cursor:progress;position:relative}
+.mm-spin{animation:mm-spin 1s linear infinite}
+@keyframes mm-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.mm-spin{animation:none}}
+.mm-btn--lg{font-size:var(--mm-text-base)}
+.mm-btn--dark{--bg:var(--mm-surface-inverse);--fg:var(--mm-white);--bd:var(--mm-surface-inverse)}
+.mm-btn--block{display:flex;width:100%}
+/* Zona táctil de 44 px sin agrandar el control visible (hay que dejar >= 8 px entre controles vecinos) */
+.mm-btn::after,.mm-icon-btn::after,.mm-chip::after{content:"";position:absolute;inset:min(0px,calc((100% - var(--mm-hit-min))/2))}

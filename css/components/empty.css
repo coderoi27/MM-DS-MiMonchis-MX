@@ -1,0 +1,6 @@
+/* MM-DS v1.0.0 · components/empty.css · 11. Estado vacío · NO editar en la app */
+.mm-empty{display:grid;justify-items:center;gap:.6rem;text-align:center;padding:2.25rem 1.25rem}
+.mm-empty__ico{width:64px;height:64px;border-radius:50%;background:var(--mm-brand-50);color:var(--mm-brand-700);display:grid;place-items:center}
+.mm-empty h4{font-size:var(--mm-text-lg);font-weight:var(--mm-font-weight-semibold)}
+.mm-empty p{color:var(--mm-text-muted);max-width:42ch;font-size:var(--mm-text-sm)}
+.mm-empty--error .mm-empty__ico{background:var(--mm-danger-bg);color:var(--mm-danger-600)}

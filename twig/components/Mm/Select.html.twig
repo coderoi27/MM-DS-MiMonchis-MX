@@ -1,0 +1,17 @@
+{# MM-DS v1.0.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Select — .mm-select · <select> nativo. «options» es un mapa valor => texto.
+   Uso: <twig:Mm:Select name="status" label="Estado" :options="statuses" :value="filters.status" placeholder="Todos" /> #}
+{% props name, label, options = {}, value = null, placeholder = null, help = null, error = null, required = false, size = 'md', id = null %}
+{% set fid = id ?? ('mm-f-' ~ name) %}
+{% set described = [help ? fid ~ '-help' : null, error ? fid ~ '-err' : null]|filter(v => v)|join(' ') %}
+<div class="mm-field{{ error ? ' mm-field--invalid' : '' }}">
+    <label class="mm-label" for="{{ fid }}">{{ label }}{% if required %}<span class="mm-req" aria-hidden="true">*</span>{% endif %}</label>
+    <select {{ attributes.defaults({id: fid, name: name, class: 'mm-select mm-input' ~ (size == 'sm' ? ' mm-select--sm' : ''), required: required ? true : null, 'aria-invalid': error ? 'true' : null, 'aria-describedby': described ?: null}) }}>
+        {% if placeholder %}<option value="">{{ placeholder }}</option>{% endif %}
+        {% for optValue, optLabel in options %}
+            <option value="{{ optValue }}"{{ value is not null and (optValue ~ '') == (value ~ '') ? ' selected' : '' }}>{{ optLabel }}</option>
+        {% endfor %}
+    </select>
+    {% if help %}<span class="mm-help" id="{{ fid }}-help">{{ help }}</span>{% endif %}
+    {% if error %}<span class="mm-error" id="{{ fid }}-err" role="alert"><twig:Mm:Icon name="circle-alert" size="sm" />{{ error }}</span>{% endif %}
+</div>
