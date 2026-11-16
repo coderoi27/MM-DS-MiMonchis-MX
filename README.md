@@ -73,7 +73,7 @@ La lista de pre-zip de cada app añade (ver doc 02, B5): «hex fuera de `mm-toke
 
 ## Cómo se carga en una app (lo hacen P1/A1/L1, no este paquete)
 
-- **Public (AssetMapper):** en `assets/styles/app.css`: `@import "../mm-ds/tokens/mm-tokens.css"; @import "../mm-ds/css/mm-base.css"; @import "../mm-ds/css/mm-components.css";` y `class="mm-body"` en `<body>`.
+- **Public (AssetMapper):** en `assets/styles/app.css`: `@import url("../mm-ds/tokens/mm-tokens.css"); @import url("../mm-ds/css/mm-base.css"); @import url("../mm-ds/css/mm-components.css");` y `class="mm-body"` en `<body>`. **Con `url(...)`**: el compilador de AssetMapper (Symfony 7.2) solo reescribe `url()`; un `@import "ruta"` pelón se queda sin resumen y da 404 en el navegador (P1 lo comprobó). En `event.css` (minisitio) solo tokens + base.
 - **Admin / Locals (Tailwind 4):** `@import "tailwindcss";` luego los tres anteriores y `@import "../mm-ds/tokens/mm-tailwind.css";` (el `@theme inline` apunta a `var(--mm-*)`, así los tokens siguen siendo la única fuente).
 - **Twig:** requiere `symfony/ux-twig-component` (+ `symfony/ux-icons` en Admin/Locals; `ux:icons:lock` guarda los SVG en `assets/icons/`). Uso: `<twig:Mm:Button variant="primary" icon="plus">Nuevo</twig:Mm:Button>`.
 - **Fuente:** `mm-base.css` ya trae el `@font-face` (sin Google Fonts).
