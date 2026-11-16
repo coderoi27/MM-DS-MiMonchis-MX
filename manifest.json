@@ -13,7 +13,8 @@
         },
         "locals": {
             "dir": "Locals-MiMonchisMX",
-            "tailwind": true
+            "tailwind": true,
+            "linkedCss": true
         }
     },
     "targets": [
@@ -109,12 +110,12 @@
     ],
     "files": {
         ".gitignore": "sha256:cf237c7aff44efbe6e502e645c3e06da03a69d7bdeb43392108ef3348143417e",
-        "README.md": "sha256:d011786650d0fff8e5d9d4412caafa1c16cebb26cdbf311ece9101a238aafe78",
+        "README.md": "sha256:662be4e766ea5ed867bb01f8cf973fff7c2f951d6950c97c04ba86b95f675838",
         "VERSION": "sha256:d1b77b88f4b9f675a900e4143ac768a21218623cfe1703ca43162388c3271bd6",
-        "bin/_lib.php": "sha256:beded3bcd8948b85fc3a5109533dcaf8a75aa4caf3ea0e189311c1b8a6db13b4",
-        "bin/mm-ds-manifest": "sha256:78a5b8edf4b1b8621565b396ad42f1c6e12cce3eeea016b56c7a73516e9bd443",
+        "bin/_lib.php": "sha256:ca4e6d81bcf03cd32d37d72043917021ba375c967e3d92ee6c05b95b9427677d",
+        "bin/mm-ds-manifest": "sha256:964c441aa6b4bd795af8cac4a984993073ab4552b5e851b2e7c524822a30c841",
         "bin/mm-ds-sync": "sha256:e2c8d335bf64b7a61fea072846dd4ed117f44b62582e3f4b2af9d483bec88e72",
-        "bin/mm-ds-verify": "sha256:14adea8f8a92788396c7066b0dc6a3c3ae7482a8bf59067b8ca3e359aa582b1f",
+        "bin/mm-ds-verify": "sha256:92ac387edb3f19738e3086902d5ccdce49fa0f635e9e4460ec534d2d20e79f89",
         "brand/mm-isotipo-provisional.svg": "sha256:13dd670a619d7cb7158063287e608908d2ccf9878c38701f2a6107f58f710f0e",
         "brand/mm-logo-horizontal-color.svg": "sha256:fdd674a64f740881bc876aa0fcb872f5ecf7b837620ca55e4c1a636c89c955c1",
         "brand/mm-logo-horizontal-white-provisional.svg": "sha256:d9dacc513f47ab21656014ee624ef10446d9aaf03f97f25fee6e1843c4b0b296",

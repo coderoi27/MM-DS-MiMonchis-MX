@@ -22,7 +22,7 @@ $manifest = [
     'apps' => $prev['apps'] ?? [
         'public' => ['dir' => 'Public-MiMonchisMX', 'tailwind' => false],
         'admin'  => ['dir' => 'Admin-MiMonchisMX',  'tailwind' => true],
-        'locals' => ['dir' => 'Locals-MiMonchisMX', 'tailwind' => true],
+        'locals' => ['dir' => 'Locals-MiMonchisMX', 'tailwind' => true, 'linkedCss' => true], // L1: tokens/base/componentes por <link> (assets/styles/mm-ds.css), no dentro del build de Tailwind → la fuente se queda en assets/mm-ds/fonts/
     ],
     'targets' => $prev['targets'] ?? [
         ['tokens/', 'assets/mm-ds/tokens/'],

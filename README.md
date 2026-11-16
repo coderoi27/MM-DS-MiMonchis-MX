@@ -30,7 +30,7 @@ MM-DS/
 |---|---|
 | `tokens/`, `css/`, `fonts/`, `icons/`, `brand/` | `assets/mm-ds/<misma subruta>` |
 | `tokens/mm-tailwind.css` | `assets/mm-ds/tokens/mm-tailwind.css` (**solo** Admin y Locals) |
-| `fonts/` | Public: `assets/mm-ds/fonts/` · **Admin y Locals: `assets/fonts/`** (Tailwind junta `mm-base.css` en `assets/styles/app.css`, y el `url("../fonts/…")` del `@font-face` queda relativo a `assets/styles/`) |
+| `fonts/` | Public: `assets/mm-ds/fonts/` · **Admin: `assets/fonts/`** (Locals, con `linkedCss`: `assets/mm-ds/fonts/`) (Tailwind junta `mm-base.css` en `assets/styles/app.css`, y el `url("../fonts/…")` del `@font-face` queda relativo a `assets/styles/`) |
 | `twig/components/Mm/` | `templates/components/Mm/` |
 | (huellas de lo copiado) | `mm-ds.lock` en la raíz de la app |
 
@@ -76,6 +76,7 @@ La lista de pre-zip de cada app añade (ver doc 02, B5): «hex fuera de `mm-toke
 - **Public (AssetMapper):** en `assets/styles/app.css`: `@import url("../mm-ds/tokens/mm-tokens.css"); @import url("../mm-ds/css/mm-base.css"); @import url("../mm-ds/css/mm-components.css");` y `class="mm-body"` en `<body>`. **Con `url(...)`**: el compilador de AssetMapper (Symfony 7.2) solo reescribe `url()`; un `@import "ruta"` pelón se queda sin resumen y da 404 en el navegador (P1 lo comprobó). En `event.css` (minisitio) solo tokens + base.
 - **Admin / Locals (Tailwind 4):** `@import "tailwindcss";` luego los tres anteriores y `@import "../mm-ds/tokens/mm-tailwind.css";` (el `@theme inline` apunta a `var(--mm-*)`, así los tokens siguen siendo la única fuente).
 - **Twig:** requiere `symfony/ux-twig-component` (+ `symfony/ux-icons` en Admin/Locals; `ux:icons:lock` guarda los SVG en `assets/icons/`). Uso: `<twig:Mm:Button variant="primary" icon="plus">Nuevo</twig:Mm:Button>`.
+- **Locals (`linkedCss` en `manifest.json`):** tokens, base y componentes se cargan por `<link>` desde `assets/styles/mm-ds.css` (con `@import url(...)`, capas `base`/`components`) y solo `mm-tailwind.css` entra al build de Tailwind. Así login, registro y landing se ven bien aunque falle el build de Tailwind o el JS; la fuente queda en `assets/mm-ds/fonts/` (el Tailwind CLI no reescribe los `url()` de los archivos importados).
 - **Fuente:** `mm-base.css` ya trae el `@font-face` (sin Google Fonts).
 
 ## Qué NO hace v1.0.0 (pendiente)
