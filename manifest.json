@@ -1,6 +1,6 @@
 {
     "name": "MM-DS",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Sistema de diseño único de Mi Monchis MX: tokens, CSS, componentes Twig, íconos, fuente y marca.",
     "apps": {
         "public": {
@@ -40,6 +40,12 @@
         [
             "twig/components/Mm/",
             "templates/components/Mm/"
+        ]
+    ],
+    "tailwindTargets": [
+        [
+            "fonts/",
+            "assets/fonts/"
         ]
     ],
     "onlyFor": {
@@ -103,12 +109,12 @@
     ],
     "files": {
         ".gitignore": "sha256:cf237c7aff44efbe6e502e645c3e06da03a69d7bdeb43392108ef3348143417e",
-        "README.md": "sha256:f1cf85e2eaaab996f6202f25fc19512130ce9f5bccf2b61f5255cef027efd9b8",
-        "VERSION": "sha256:44e161e4495cac2cf7858043e9e6418e9579f0ddcfae826f9a372622968ce066",
-        "bin/_lib.php": "sha256:1071e8e5c5abbaa51a6ce4301011a58805d2923ddf7cc12aab58f4e1ac68ca2d",
-        "bin/mm-ds-manifest": "sha256:00e496f3def938bb6f6043e1c305b54e732234bdfab518c957854862ed618d39",
+        "README.md": "sha256:5b1b9569774e0c6cb3df98db580acba8ab2dc8a9c6e4fc051b0b3f8f862cd939",
+        "VERSION": "sha256:9fd28642d3aca191e5c7fc2383cfd6fabb2aac8743f029dabb8989ac584e31bc",
+        "bin/_lib.php": "sha256:beded3bcd8948b85fc3a5109533dcaf8a75aa4caf3ea0e189311c1b8a6db13b4",
+        "bin/mm-ds-manifest": "sha256:78a5b8edf4b1b8621565b396ad42f1c6e12cce3eeea016b56c7a73516e9bd443",
         "bin/mm-ds-sync": "sha256:e2c8d335bf64b7a61fea072846dd4ed117f44b62582e3f4b2af9d483bec88e72",
-        "bin/mm-ds-verify": "sha256:764b3089b64d0668843b79c3362172ed412a45f2e4797c27193da06e29c08af7",
+        "bin/mm-ds-verify": "sha256:14adea8f8a92788396c7066b0dc6a3c3ae7482a8bf59067b8ca3e359aa582b1f",
         "brand/mm-isotipo-provisional.svg": "sha256:13dd670a619d7cb7158063287e608908d2ccf9878c38701f2a6107f58f710f0e",
         "brand/mm-logo-horizontal-color.svg": "sha256:fdd674a64f740881bc876aa0fcb872f5ecf7b837620ca55e4c1a636c89c955c1",
         "brand/mm-logo-horizontal-white-provisional.svg": "sha256:d9dacc513f47ab21656014ee624ef10446d9aaf03f97f25fee6e1843c4b0b296",

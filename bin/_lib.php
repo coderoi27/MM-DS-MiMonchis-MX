@@ -35,6 +35,11 @@ function mmds_load_manifest(string $root): array {
 /** Ruta de un archivo del paquete dentro de la app, o null si es solo del paquete / no aplica a esa app. */
 function mmds_target(array $m, string $rel, string $appKey): ?string {
     if (isset($m['onlyFor'][$rel]) && !in_array($appKey, $m['onlyFor'][$rel], true)) return null;
+    if (!empty($m['apps'][$appKey]['tailwind'])) {
+        foreach ($m['tailwindTargets'] ?? [] as [$from, $to]) {
+            if (str_starts_with($rel, $from)) return $to . substr($rel, strlen($from));
+        }
+    }
     foreach ($m['targets'] as [$from, $to]) {
         if (str_starts_with($rel, $from)) return $to . substr($rel, strlen($from));
     }

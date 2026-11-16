@@ -30,6 +30,7 @@ MM-DS/
 |---|---|
 | `tokens/`, `css/`, `fonts/`, `icons/`, `brand/` | `assets/mm-ds/<misma subruta>` |
 | `tokens/mm-tailwind.css` | `assets/mm-ds/tokens/mm-tailwind.css` (**solo** Admin y Locals) |
+| `fonts/` | Public: `assets/mm-ds/fonts/` · **Admin y Locals: `assets/fonts/`** (Tailwind junta `mm-base.css` en `assets/styles/app.css`, y el `url("../fonts/…")` del `@font-face` queda relativo a `assets/styles/`) |
 | `twig/components/Mm/` | `templates/components/Mm/` |
 | (huellas de lo copiado) | `mm-ds.lock` en la raíz de la app |
 

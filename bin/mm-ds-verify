@@ -122,6 +122,7 @@ function verify_app(array $m, string $key, string $app, bool $allowOld, callable
     // archivos ajenos dentro de las carpetas gestionadas
     $managed = [];
     foreach ($m['targets'] as [, $to]) $managed[] = $to;
+    if (!empty($m['apps'][$key]['tailwind'])) foreach ($m['tailwindTargets'] ?? [] as [, $to]) $managed[] = $to;
     foreach ($managed as $dir) {
         if (!is_dir("$app/$dir")) continue;
         $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("$app/$dir", FilesystemIterator::SKIP_DOTS));
