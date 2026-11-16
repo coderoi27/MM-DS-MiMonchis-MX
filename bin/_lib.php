@@ -49,6 +49,14 @@ function mmds_resolve_app(array $m, string $arg, string $root): array {
             return [$key, $sistemas . '/' . $cfg['dir']];
         }
     }
+    // «<app>=<ruta>»: una carpeta con otro nombre (p. ej. un worktree .worktrees/mm-ds-a1) que es esa app.
+    if (($eq = strpos($arg, '=')) !== false) {
+        $k = substr($arg, 0, $eq);
+        $real = realpath(substr($arg, $eq + 1));
+        foreach ($m['apps'] as $key => $cfg) {
+            if (strcasecmp($k, $key) === 0 && $real && is_dir($real)) return [$key, $real];
+        }
+    }
     $real = realpath($arg);
     if ($real && is_dir($real)) {
         foreach ($m['apps'] as $key => $cfg) if (basename($real) === $cfg['dir']) return [$key, $real];

@@ -51,6 +51,7 @@ MM-DS/
 ```bash
 bin/mm-ds-sync admin          # también: locals · public · o la ruta de la carpeta
 bin/mm-ds-sync admin --dry-run   # solo muestra qué copiaría
+bin/mm-ds-sync admin=/ruta/al/worktree   # carpeta con otro nombre (p. ej. .worktrees/mm-ds-a1); verify acepta lo mismo
 ```
 
 Copia los archivos a las rutas de la tabla, retira los que el paquete ya no trae y escribe `mm-ds.lock` (`{package, version, files:{ruta: sha256}}`).
