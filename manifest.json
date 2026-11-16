@@ -1,6 +1,6 @@
 {
     "name": "MM-DS",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "description": "Sistema de diseño único de Mi Monchis MX: tokens, CSS, componentes Twig, íconos, fuente y marca.",
     "apps": {
         "public": {
@@ -109,8 +109,8 @@
     ],
     "files": {
         ".gitignore": "sha256:cf237c7aff44efbe6e502e645c3e06da03a69d7bdeb43392108ef3348143417e",
-        "README.md": "sha256:a04247d35ee24cfa0d6372811288bc0d9ab69d0852ef5b8c0db71050bab345fb",
-        "VERSION": "sha256:9fd28642d3aca191e5c7fc2383cfd6fabb2aac8743f029dabb8989ac584e31bc",
+        "README.md": "sha256:d011786650d0fff8e5d9d4412caafa1c16cebb26cdbf311ece9101a238aafe78",
+        "VERSION": "sha256:d1b77b88f4b9f675a900e4143ac768a21218623cfe1703ca43162388c3271bd6",
         "bin/_lib.php": "sha256:beded3bcd8948b85fc3a5109533dcaf8a75aa4caf3ea0e189311c1b8a6db13b4",
         "bin/mm-ds-manifest": "sha256:78a5b8edf4b1b8621565b396ad42f1c6e12cce3eeea016b56c7a73516e9bd443",
         "bin/mm-ds-sync": "sha256:e2c8d335bf64b7a61fea072846dd4ed117f44b62582e3f4b2af9d483bec88e72",

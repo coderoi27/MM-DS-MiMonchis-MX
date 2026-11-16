@@ -1,4 +1,4 @@
-# MM-DS · sistema de diseño de Mi Monchis MX — v1.0.3
+# MM-DS · sistema de diseño de Mi Monchis MX — v1.0.4
 
 Fuente única de **tokens, CSS, componentes Twig, íconos, fuente y marca** para Public, Admin y Locals.
 Aquí se edita; en las apps solo se **copia** (con `bin/mm-ds-sync`) y se **verifica** (con `bin/mm-ds-verify`).
