@@ -6,7 +6,7 @@
 {% set described = [help ? fid ~ '-help' : null, error ? fid ~ '-err' : null]|filter(v => v)|join(' ') %}
 <div class="mm-field{{ error ? ' mm-field--invalid' : '' }}">
     <label class="mm-label" for="{{ fid }}">{{ label }}{% if required %}<span class="mm-req" aria-hidden="true">*</span>{% endif %}</label>
-    <select {{ attributes.defaults({id: fid, name: name, class: 'mm-select mm-input' ~ (size == 'sm' ? ' mm-select--sm' : ''), required: required ? true : null, 'aria-invalid': error ? 'true' : null, 'aria-describedby': described ?: null}) }}>
+    <select {{ attributes.defaults({id: fid, name: name, class: 'mm-select mm-input' ~ (size == 'sm' ? ' mm-select--sm' : ''), required: required ? true : false, 'aria-invalid': error ? 'true' : false, 'aria-describedby': described ?: false}) }}>
         {% if placeholder %}<option value="">{{ placeholder }}</option>{% endif %}
         {% for optValue, optLabel in options %}
             <option value="{{ optValue }}"{{ value is not null and (optValue ~ '') == (value ~ '') ? ' selected' : '' }}>{{ optLabel }}</option>

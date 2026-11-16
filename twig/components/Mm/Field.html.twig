@@ -8,10 +8,10 @@
 <div class="mm-field{{ error ? ' mm-field--invalid' : '' }}">
     <label class="mm-label" for="{{ fid }}">{{ label }}{% if required %}<span class="mm-req" aria-hidden="true">*</span>{% endif %}</label>
     {% if type == 'textarea' %}
-        <textarea {{ attributes.defaults({id: fid, name: name, class: 'mm-textarea', required: required ? true : null, 'aria-invalid': error ? 'true' : null, 'aria-describedby': described ?: null}) }}>{{ value }}</textarea>
+        <textarea {{ attributes.defaults({id: fid, name: name, class: 'mm-textarea', required: required ? true : false, 'aria-invalid': error ? 'true' : false, 'aria-describedby': described ?: false}) }}>{{ value }}</textarea>
     {% else %}
         {% set input %}
-            <input {{ attributes.defaults({id: fid, name: name, type: type, value: value, class: 'mm-input' ~ (size == 'sm' ? ' mm-input--sm' : ''), required: required ? true : null, 'aria-invalid': error ? 'true' : null, 'aria-describedby': described ?: null}) }}>
+            <input {{ attributes.defaults({id: fid, name: name, type: type, value: value ?? false, class: 'mm-input' ~ (size == 'sm' ? ' mm-input--sm' : ''), required: required ? true : false, 'aria-invalid': error ? 'true' : false, 'aria-describedby': described ?: false}) }}>
         {% endset %}
         {% if icon %}
             <div class="mm-ctrl"><twig:Mm:Icon :name="icon" />{{ input }}</div>

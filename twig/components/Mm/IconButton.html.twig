@@ -4,6 +4,6 @@
 {% props icon, label, variant = 'ghost', size = 'md', pressed = null %}
 {% set cls = 'mm-icon-btn' ~ (variant != 'ghost' ? ' mm-icon-btn--' ~ variant : '') ~ (size == 'sm' ? ' mm-icon-btn--sm' : '') %}
 {% set tag = attributes.all.href is defined ? 'a' : 'button' %}
-<{{ tag }} {{ attributes.defaults({class: cls, 'aria-label': label, 'aria-pressed': pressed is null ? null : (pressed ? 'true' : 'false')}).defaults(tag == 'button' ? {type: 'button'} : {}) }}>
+<{{ tag }} {{ attributes.defaults({class: cls, 'aria-label': label, 'aria-pressed': pressed is null ? false : (pressed ? 'true' : 'false')}).defaults(tag == 'button' ? {type: 'button'} : {}) }}>
     <twig:Mm:Icon :name="icon" />
 </{{ tag }}>

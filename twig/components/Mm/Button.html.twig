@@ -4,7 +4,7 @@
 {% props variant = 'primary', size = 'md', type = 'button', icon = null, iconEnd = null, loading = false, block = false %}
 {% set tag = attributes.all.href is defined ? 'a' : 'button' %}
 {% set cls = 'mm-btn mm-btn--' ~ variant ~ (size != 'md' ? ' mm-btn--' ~ size : '') ~ (block ? ' mm-btn--block' : '') %}
-<{{ tag }} {{ attributes.defaults({class: cls, 'aria-busy': loading ? 'true' : null}).defaults(tag == 'button' ? {type: type, disabled: loading ? true : null} : {}) }}>
+<{{ tag }} {{ attributes.defaults({class: cls, 'aria-busy': loading ? 'true' : false}).defaults(tag == 'button' ? {type: type, disabled: loading ? true : false} : {}) }}>
     {%- if loading -%}
         <twig:Mm:Icon name="refresh-cw" class="mm-spin" />
     {%- elseif icon -%}

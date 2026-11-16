@@ -4,7 +4,7 @@
    Uso: <twig:Mm:Switch name="social" label="Publicaciones sociales" :checked="true" /> #}
 {% props name, label, checked = false, onLabel = 'Activado', offLabel = 'Desactivado' %}
 <label class="mm-switch">
-    <input {{ attributes.defaults({type: 'checkbox', role: 'switch', name: name, checked: checked ? true : null, 'data-mm-switch': ''}) }}>
+    <input {{ attributes.defaults({type: 'checkbox', role: 'switch', name: name, checked: checked ? true : false, 'data-mm-switch': ''}) }}>
     <span>{{ label }}</span>
     <span class="st" aria-live="polite" data-on="{{ onLabel }}" data-off="{{ offLabel }}">{{ checked ? onLabel : offLabel }}</span>
 </label>

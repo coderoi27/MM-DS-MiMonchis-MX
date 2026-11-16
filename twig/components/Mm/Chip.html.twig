@@ -5,8 +5,8 @@
 {% set tag = attributes.all.href is defined ? 'a' : 'button' %}
 {% set cls = 'mm-chip' ~ (variant ? ' mm-chip--' ~ variant : '') %}
 {% set state = tag == 'a'
-    ? {'aria-current': current ? 'true' : null}
-    : {type: 'button', 'aria-pressed': pressed is null ? null : (pressed ? 'true' : 'false')} %}
+    ? {'aria-current': current ? 'true' : false}
+    : {type: 'button', 'aria-pressed': pressed is null ? false : (pressed ? 'true' : 'false')} %}
 <{{ tag }} {{ attributes.defaults({class: cls}).defaults(state) }}>
     {%- if icon %}<twig:Mm:Icon :name="icon" size="sm" />{% endif -%}
     <span class="lbl">{% block content %}{% endblock %}</span>

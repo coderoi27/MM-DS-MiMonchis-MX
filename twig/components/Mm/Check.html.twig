@@ -3,6 +3,6 @@
    Uso: <twig:Mm:Check name="terms" label="Acepto los términos" :checked="true" /> · type="radio" para opciones exclusivas #}
 {% props name, label = null, type = 'checkbox', value = '1', checked = false %}
 <label class="mm-check">
-    <input {{ attributes.defaults({type: type, name: name, value: value, checked: checked ? true : null}) }}>
+    <input {{ attributes.defaults({type: type, name: name, value: value, checked: checked ? true : false}) }}>
     <span>{% block content %}{{ label }}{% endblock %}</span>
 </label>
