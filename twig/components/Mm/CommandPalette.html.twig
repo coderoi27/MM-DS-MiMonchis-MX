@@ -1,0 +1,24 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:CommandPalette — .mm-cmdk · paleta de comandos (⌘K / Ctrl-K / «/») sobre <dialog>. «items» = [{label, href, group?, icon?, hint?, keywords?}].
+   «searchUrl» opcional: ofrece «Buscar «texto»…» que navega a searchUrl ~ texto. Requiere el controlador Stimulus «mm-cmdk» de la app.
+   Uso: <twig:Mm:CommandPalette :items="items" searchUrl="/locations?q=" searchLabel="Buscar locales" /> #}
+{% props items = [], searchUrl = null, searchLabel = 'Buscar' , id = 'mm-cmdk' %}
+<dialog {{ attributes.defaults({id: id, class: 'mm-cmdk', 'aria-label': 'Ir a una pantalla', 'data-controller': 'mm-cmdk', 'data-mm-cmdk-search-url-value': searchUrl ?: false, 'data-mm-cmdk-search-label-value': searchLabel}) }}>
+    <div class="mm-cmdk__search">
+        <twig:Mm:Icon name="search" />
+        <input class="mm-cmdk__input" type="text" role="combobox" aria-expanded="true" aria-controls="{{ id }}-list" aria-autocomplete="list" placeholder="Ir a una pantalla o buscar…" autocomplete="off" spellcheck="false" data-mm-cmdk-target="input" data-action="input->mm-cmdk#filter keydown->mm-cmdk#key">
+        <span class="mm-kbd">Esc</span>
+    </div>
+    <ul class="mm-cmdk__list" id="{{ id }}-list" role="listbox" aria-label="Resultados" data-mm-cmdk-target="list">
+        {% set last = null %}
+        {% for it in items %}
+            {% if it.group|default(null) and it.group != last %}<li class="mm-cmdk__group" role="presentation" data-group="{{ it.group }}">{{ it.group }}</li>{% set last = it.group %}{% endif %}
+            <li role="option" aria-selected="false" id="{{ id }}-o{{ loop.index }}" class="mm-cmdk__item" data-href="{{ it.href }}" data-group="{{ it.group|default('') }}" data-text="{{ (it.label ~ ' ' ~ it.group|default('') ~ ' ' ~ it.keywords|default(''))|lower }}" data-mm-cmdk-target="option" data-action="click->mm-cmdk#choose mousemove->mm-cmdk#hover">
+                <twig:Mm:Icon :name="it.icon|default('chevron-right')" size="sm" /><span>{{ it.label }}</span>{% if it.hint|default(null) %}<small>{{ it.hint }}</small>{% endif %}
+            </li>
+        {% endfor %}
+        <li role="option" aria-selected="false" id="{{ id }}-search" class="mm-cmdk__item" hidden data-mm-cmdk-target="search" data-action="click->mm-cmdk#choose mousemove->mm-cmdk#hover"><twig:Mm:Icon name="search" size="sm" /><span data-mm-cmdk-target="searchText"></span></li>
+    </ul>
+    <p class="mm-cmdk__empty" hidden data-mm-cmdk-target="empty">Sin coincidencias.</p>
+    <div class="mm-cmdk__foot" aria-hidden="true"><span><span class="mm-kbd">↑</span> <span class="mm-kbd">↓</span> moverse</span><span><span class="mm-kbd">↵</span> abrir</span><span><span class="mm-kbd">Esc</span> cerrar</span></div>
+</dialog>

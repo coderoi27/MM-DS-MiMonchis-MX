@@ -2,9 +2,10 @@
 {# Mm:Table — .mm-table-wrap › .mm-table · «caption» obligatorio (solo lectores de pantalla). Bloques: head (<tr> de <th scope="col">) · content (<tbody>).
    Números: class="num"; acciones: class="act". Ordenamiento: aria-sort en el <th>. Vacía → Mm:Empty.
    Uso: <twig:Mm:Table caption="Locales publicados" dense> <twig:block name="head"><tr>…</tr></twig:block> … #}
-{% props caption, dense = false %}
-<div class="mm-table-wrap">
-    <table {{ attributes.defaults({class: 'mm-table' ~ (dense ? ' mm-table--dense' : '')}) }}>
+{# v1.1.0: cards = cada fila pasa a tarjeta en < 640 px (las <td> llevan data-label); scroll = el contenedor desplaza y el encabezado queda fijo. #}
+{% props caption, dense = false, cards = false, scroll = false %}
+<div class="mm-table-wrap{{ scroll ? ' mm-table-wrap--scroll' : '' }}">
+    <table {{ attributes.defaults({class: 'mm-table' ~ (dense ? ' mm-table--dense' : '') ~ (cards ? ' mm-table--cards' : '')}) }}>
         <caption class="mm-sr-only">{{ caption }}</caption>
         <thead>{% block head %}{% endblock %}</thead>
         <tbody>{% block content %}{% endblock %}</tbody>

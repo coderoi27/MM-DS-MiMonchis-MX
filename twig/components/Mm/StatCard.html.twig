@@ -1,0 +1,26 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:StatCard — .mm-stat-card · KPI con tendencia. value null = sin dato («—» + hint). trend = variación en % (número, puede ser negativa);
+   goodWhen: up|down (qué dirección es buena). Con href la tarjeta entera es un enlace. tone: neutral|brand|warning|danger|success|info.
+   Uso: <twig:Mm:StatCard label="Claims por revisar" :value="14" icon="badge-check" tone="warning" hint="3 con más de 3 días" href="/claims" /> #}
+{% props label, value = null, icon = null, tone = 'neutral', trend = null, trendLabel = null, goodWhen = 'up', hint = null, href = null %}
+{% set tag = href ? 'a' : 'article' %}
+{% set fmt = value is null ? '—' : ((value ~ '') matches '/^-?[0-9]+$/' ? value|number_format(0, '.', ',') : value) %}
+<{{ tag }} {{ attributes.defaults({class: 'mm-stat-card' ~ (tone != 'neutral' ? ' mm-stat-card--' ~ tone : ''), href: href ?: false}) }}>
+    <div class="mm-stat-card__head">
+        <span class="mm-stat-card__label">{{ label }}</span>
+        {% if icon %}<span class="mm-stat-card__ico"><twig:Mm:Icon :name="icon" /></span>{% endif %}
+        {% if href %}<span class="mm-stat-card__go"><twig:Mm:Icon name="arrow-up-right" size="sm" /></span>{% endif %}
+    </div>
+    <div class="mm-stat-card__value{{ value is null ? ' mm-stat-card__value--na' : '' }}">{{ fmt }}</div>
+    <div class="mm-stat-card__foot">
+        {% if trend is not null and value is not null %}
+            {% set dir = trend > 0 ? 'up' : (trend < 0 ? 'down' : 'flat') %}
+            {% set mood = dir == 'flat' ? 'flat' : (dir == goodWhen ? 'good' : 'bad') %}
+            <span class="mm-trend mm-trend--{{ mood }}"><twig:Mm:Icon :name="dir == 'up' ? 'trending-up' : (dir == 'down' ? 'trending-down' : 'minus')" size="sm" />{{ trend > 0 ? '+' : '' }}{{ trend|number_format(0) }} %<span class="mm-sr-only">{{ mood == 'good' ? ' (mejora)' : (mood == 'bad' ? ' (empeora)' : ' (sin cambio)') }}</span></span>
+            {% if trendLabel %}<span>{{ trendLabel }}</span>{% endif %}
+        {% elseif hint %}
+            <span>{{ hint }}</span>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</{{ tag }}>

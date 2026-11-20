@@ -1,0 +1,29 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:BarChart — .mm-chart · columnas en SVG generadas en el servidor (sin librería JS) + tabla de datos plegable para lectores y verificación.
+   «data» = [{label, value}] en orden cronológico. «summary» = frase con la tendencia (se lee antes de la gráfica). height en rem.
+   Si todos los valores son 0, la vista debe mostrar Mm:Empty en su lugar. Uso: <twig:Mm:BarChart caption="Eventos por día" :data="series" summary="1 240 eventos en 30 días" /> #}
+{% props data = [], caption, summary = null, unit = 'eventos', height = 10 %}
+{% set n = data|length %}
+{% set max = n > 0 ? max(data|map(d => d.value)|merge([1])) : 1 %}
+<figure {{ attributes.defaults({class: 'mm-chart'}) }}>
+    {% if summary %}<figcaption class="mm-chart__summary">{{ summary }}</figcaption>{% endif %}
+    <div class="mm-chart__plot" aria-hidden="true" style="--mm-chart-h: {{ height }}rem">
+        <span class="mm-chart__max">{{ max|number_format(0, '.', ',') }}</span>
+        <svg class="mm-chart__svg" viewBox="0 0 {{ n * 10 }} 100" preserveAspectRatio="none" focusable="false">
+            {% for d in data %}
+                {% set h = d.value > 0 ? max(2, (d.value / max * 100)|round(2)) : 1 %}
+                <rect class="mm-chart__bar{{ d.value > 0 ? '' : ' mm-chart__bar--zero' }}" x="{{ (loop.index0 * 10) + 1.5 }}" y="{{ 100 - h }}" width="7" height="{{ h }}" rx="1"><title>{{ d.label }}: {{ d.value|number_format(0, '.', ',') }} {{ unit }}</title></rect>
+            {% endfor %}
+        </svg>
+    </div>
+    {% if n > 0 %}
+        <div class="mm-chart__axis" aria-hidden="true"><span>{{ (data|first).label }}</span>{% if n > 2 %}<span>{{ data[(n / 2)|round(0, 'floor')].label }}</span>{% endif %}<span>{{ (data|last).label }}</span></div>
+    {% endif %}
+    <details>
+        <summary>Ver datos de la gráfica</summary>
+        <twig:Mm:Table :caption="caption" dense>
+            <twig:block name="head"><tr><th scope="col">Día</th><th scope="col" class="num">{{ unit|capitalize }}</th></tr></twig:block>
+            {% for d in data|reverse %}<tr><td>{{ d.label }}</td><td class="num">{{ d.value|number_format(0, '.', ',') }}</td></tr>{% endfor %}
+        </twig:Mm:Table>
+    </details>
+</figure>

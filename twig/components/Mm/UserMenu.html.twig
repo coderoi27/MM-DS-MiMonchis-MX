@@ -1,0 +1,12 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:UserMenu — .mm-usermenu · menú de cuenta (<details> nativo). Bloque content: enlaces <a> del menú (p. ej. «Salir»).
+   Uso: <twig:Mm:UserMenu name="admin@mimonchis.mx" role="Super admin"><a href="/logout">…</a></twig:Mm:UserMenu> #}
+{% props name, role = null, initials = null %}
+{% set ini = initials ?? (name|slice(0, 1)|upper) %}
+<details {{ attributes.defaults({class: 'mm-usermenu', 'data-controller': 'mm-details'}) }}>
+    <summary aria-label="Cuenta: {{ name }}"><span class="mm-avatar mm-avatar--32" aria-hidden="true">{{ ini ?: 'A' }}</span><span class="mm-usermenu__name">{{ name }}</span><twig:Mm:Icon name="chevron-down" size="sm" /></summary>
+    <div class="mm-menu" role="menu">
+        <div class="mm-menu__head"><b>{{ name }}</b>{% if role %}{{ role }}{% endif %}</div>
+        {% block content %}{% endblock %}
+    </div>
+</details>

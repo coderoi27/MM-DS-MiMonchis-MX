@@ -1,4 +1,4 @@
-/* MM-DS v1.0.0 · mm-components.css · índice de componentes · NO editar en la app */
+/* MM-DS v1.1.0 · mm-components.css · índice de componentes · NO editar en la app */
 @import url("components/icon.css");
 @import url("components/btn.css");
 @import url("components/icon-btn.css");
@@ -25,3 +25,7 @@
 @import url("components/popover.css");
 @import url("components/progress.css");
 @import url("components/logo.css");
+@import url("components/stat-card.css");
+@import url("components/form-section.css");
+@import url("components/chart.css");
+@import url("components/shell.css");

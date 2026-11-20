@@ -3,7 +3,7 @@ declare(strict_types=1);
 /* MM-DS · biblioteca común de bin/mm-ds-*. PHP >= 8.1 sin Composer. */
 
 const MMDS_EXCLUDE_DIRS = ['.git'];
-const MMDS_EXCLUDE_FILES = ['.DS_Store', 'manifest.json'];
+const MMDS_EXCLUDE_FILES = ['.DS_Store', 'manifest.json', '.git']; // '.git' como archivo: checkout en un git worktree
 
 function mmds_root(): string { return dirname(__DIR__); }
 

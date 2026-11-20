@@ -1,0 +1,14 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:NavGroup — .mm-nav-group · grupo plegable de la sidebar (<details> nativo, sin JS). El grupo de la ruta actual va abierto.
+   count = suma de pendientes del grupo (se ve con el grupo cerrado). Bloque content: Mm:NavItem.
+   Uso: <twig:Mm:NavGroup label="Moderación" icon="shield-check" :open="true" :count="5"> … #}
+{% props label, icon = null, open = false, count = null, id = null %}
+<details {{ attributes.defaults({class: 'mm-nav-group', open: open ? true : false, id: id ?: false}) }}>
+    <summary>
+        {% if icon %}<twig:Mm:Icon :name="icon" />{% endif %}
+        <span class="mm-nav-item__label">{{ label }}</span>
+        {% if count is not null and count > 0 %}<span class="mm-nav-count mm-nav-count--alert" aria-label="{{ count }} pendientes">{{ count > 99 ? '99+' : count }}</span>{% endif %}
+        <twig:Mm:Icon name="chevron-right" size="sm" class="mm-nav-group__chev" />
+    </summary>
+    <div class="mm-nav-group__items">{% block content %}{% endblock %}</div>
+</details>

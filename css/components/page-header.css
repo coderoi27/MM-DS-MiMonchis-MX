@@ -4,3 +4,9 @@
 .mm-page-header h1,.mm-page-header h2{font-size:var(--mm-text-2xl);font-weight:var(--mm-font-weight-bold)}
 .mm-page-header p{color:var(--mm-text-muted);font-size:var(--mm-text-sm);margin-top:.35rem;max-width:62ch}
 .mm-page-header__actions{display:flex;gap:.5rem;flex-wrap:wrap}
+/* v1.1.0 · panel: encabezado compacto (título 24 px) y acciones alineadas al centro */
+[data-shell] .mm-page-header{margin-bottom:0;align-items:center}
+[data-shell] .mm-page-header h1{font-size:var(--mm-text-xl);line-height:var(--mm-leading-tight);letter-spacing:-.01em}
+[data-shell] .mm-page-header__eyebrow{margin-bottom:.15rem}
+.mm-page-header__actions{align-items:center}
+.mm-page-header__title{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}

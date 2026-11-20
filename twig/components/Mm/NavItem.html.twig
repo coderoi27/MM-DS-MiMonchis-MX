@@ -1,0 +1,9 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:NavItem — .mm-nav-item · enlace de la sidebar de panel. active pone aria-current="page"; count muestra un contador (alert = naranja).
+   En rail la etiqueta queda solo para lectores y el title muestra el nombre. Uso: <twig:Mm:NavItem label="Claims" href="/claims" icon="badge-check" :count="3" countAlert /> #}
+{% props label, href, icon = null, active = false, count = null, countAlert = false, sub = false %}
+<a {{ attributes.defaults({class: 'mm-nav-item' ~ (sub ? ' mm-nav-item--sub' : ''), href: href, title: label, 'aria-current': active ? 'page' : false}) }}>
+    {% if icon %}<twig:Mm:Icon :name="icon" />{% endif %}
+    <span class="mm-nav-item__label">{{ label }}</span>
+    {% if count is not null and count > 0 %}<span class="mm-nav-count{{ countAlert ? ' mm-nav-count--alert' : '' }}" aria-label="{{ count }} pendientes">{{ count > 99 ? '99+' : count }}</span>{% endif %}
+</a>

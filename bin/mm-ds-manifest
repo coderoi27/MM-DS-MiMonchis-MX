@@ -35,7 +35,7 @@ $manifest = [
     // En apps con Tailwind todo el CSS se junta en assets/styles/app.css y el url("../fonts/…") del @font-face
     // queda relativo a assets/styles/: ahí la fuente va en assets/fonts/ (no en assets/mm-ds/fonts/).
     'tailwindTargets' => $prev['tailwindTargets'] ?? [['fonts/', 'assets/fonts/']],
-    'onlyFor' => $prev['onlyFor'] ?? ['tokens/mm-tailwind.css' => ['admin', 'locals']],
+    'onlyFor' => array_merge($prev['onlyFor'] ?? [], ['tokens/mm-tailwind.css' => ['admin', 'locals'], 'css/mm-components.tailwind.css' => ['admin', 'locals']]),
     'icons' => $icons,
     'files' => $files,
 ];

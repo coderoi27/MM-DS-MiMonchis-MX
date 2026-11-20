@@ -1,0 +1,13 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:FormNav — .mm-fnav · índice lateral de un formulario largo (anclas a cada Mm:FormSection). En < 1024 px pasa a una tira horizontal fija.
+   «sections» = [{id, label, icon?, errors?, hidden?}]. El controlador «mm-form» marca la sección visible (aria-current).
+   Uso: <twig:Mm:FormNav :sections="[{id:'sec-datos',label:'Datos',icon:'file-text'}]" /> #}
+{% props sections, label = 'Secciones del formulario' %}
+<nav {{ attributes.defaults({class: 'mm-fnav', 'aria-label': label}) }}>
+    <p class="mm-fnav__title">{{ label }}</p>
+    <ol>
+        {% for s in sections %}
+            <li{{ s.hidden|default(false) ? ' hidden' : '' }} data-mm-form-nav="{{ s.id }}"><a href="#{{ s.id }}" data-mm-form-target="link" data-action="mm-form#reveal">{% if s.icon|default(null) %}<twig:Mm:Icon :name="s.icon" size="sm" />{% endif %}<span>{{ s.label }}</span>{% if s.errors|default(0) > 0 %}<span class="mm-fnav__err" aria-label="{{ s.errors }} errores">{{ s.errors }}</span>{% endif %}</a></li>
+        {% endfor %}
+    </ol>
+</nav>

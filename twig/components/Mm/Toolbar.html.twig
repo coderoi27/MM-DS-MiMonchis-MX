@@ -1,0 +1,12 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Toolbar — .mm-toolbar · barra de filtros GET (los filtros viven en la URL). Bloque content: Mm:Field / Mm:Select con size="sm".
+   clearHref muestra «Limpiar» solo si hay filtros activos (active=true). Uso: <twig:Mm:Toolbar label="Filtrar claims" :clearHref="path('…')" :active="filters|filter(v => v)|length > 0"> … #}
+{% props label = 'Filtros', action = null, method = 'get', clearHref = null, active = false, submitLabel = 'Filtrar', card = true %}
+<form {{ attributes.defaults({class: 'mm-toolbar' ~ (card ? ' mm-toolbar--card' : ''), method: method, action: action ?: false, role: 'search', 'aria-label': label}) }}>
+    {% block content %}{% endblock %}
+    <div class="mm-toolbar__actions">
+        {% block actions %}{% endblock %}
+        <twig:Mm:Button type="submit" variant="secondary" size="sm" icon="filter">{{ submitLabel }}</twig:Mm:Button>
+        {% if clearHref and active %}<twig:Mm:Button variant="ghost" size="sm" :href="clearHref">Limpiar</twig:Mm:Button>{% endif %}
+    </div>
+</form>

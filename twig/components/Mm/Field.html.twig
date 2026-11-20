@@ -2,10 +2,11 @@
 {# Mm:Field — .mm-field + .mm-input / .mm-textarea · etiqueta SIEMPRE visible; el placeholder no la sustituye.
    Los atributos extra (autocomplete, inputmode, placeholder, data-*) van al <input>.
    Uso: <twig:Mm:Field name="email" label="Correo" type="email" :error="errors.email" autocomplete="email" /> #}
-{% props name, label, type = 'text', value = null, help = null, error = null, required = false, icon = null, size = 'md', id = null %}
+{# v1.1.0: grow = el campo ocupa más ancho dentro de una Mm:Toolbar (búsqueda). #}
+{% props name, label, type = 'text', value = null, help = null, error = null, required = false, icon = null, size = 'md', id = null, grow = false %}
 {% set fid = id ?? ('mm-f-' ~ name) %}
 {% set described = [help ? fid ~ '-help' : null, error ? fid ~ '-err' : null]|filter(v => v)|join(' ') %}
-<div class="mm-field{{ error ? ' mm-field--invalid' : '' }}">
+<div class="mm-field{{ error ? ' mm-field--invalid' : '' }}{{ grow ? ' mm-field--grow' : '' }}">
     <label class="mm-label" for="{{ fid }}">{{ label }}{% if required %}<span class="mm-req" aria-hidden="true">*</span>{% endif %}</label>
     {% if type == 'textarea' %}
         <textarea {{ attributes.defaults({id: fid, name: name, class: 'mm-textarea', required: required ? true : false, 'aria-invalid': error ? 'true' : false, 'aria-describedby': described ?: false}) }}>{{ value }}</textarea>

@@ -1,0 +1,8 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:EnvRibbon — .mm-env · cinta fina de entorno. No se pinta en prod. Uso: <twig:Mm:EnvRibbon :env="app.environment" /> #}
+{% props env = 'prod', note = null %}
+{% if env != 'prod' %}
+<div {{ attributes.defaults({class: 'mm-env' ~ (env == 'staging' ? ' mm-env--staging' : ''), role: 'note'}) }}>
+    <twig:Mm:Icon name="triangle-alert" />Entorno {{ env }}{{ note ? ' · ' ~ note : '' }}
+</div>
+{% endif %}

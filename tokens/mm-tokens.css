@@ -142,6 +142,27 @@
   --mm-logo-yellow: #F4C257;                    /* logo oficial (no usar fuera del logo) */
   --mm-logo-ink: #4F401B;
 
+  /* — Panel (v1.1.0, Admin A2/A3): shell, densidad y ancho de contenido — */
+  --mm-content-max: 80rem;                      /* ancho máximo del contenido en panel */
+  --mm-content-max-form: 64rem;                 /* formularios largos */
+  --mm-shell-sidebar: 16.5rem;                  /* 264px */
+  --mm-shell-rail: 4.5rem;                      /* 72px: barra colapsada (solo íconos) */
+  --mm-shell-topbar: 3.5rem;                    /* 56px */
+  --mm-control-panel: 2.25rem;                  /* 36px: controles de panel con puntero fino */
+  --mm-control-panel-touch: 2.75rem;            /* 44px: el mismo control en pantallas táctiles */
+  --mm-row-panel: 2.5rem;                       /* 40px: fila de tabla en panel (densa: 36px) */
+  --mm-sidebar-bg: var(--mm-surface-inverse);
+  --mm-sidebar-ink: var(--mm-slate-300);        /* 12.0:1 sobre slate-900 */
+  --mm-sidebar-ink-strong: var(--mm-white);
+  --mm-sidebar-muted: var(--mm-slate-400);      /* etiquetas de grupo (6.9:1 sobre slate-900) */
+  --mm-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --mm-sidebar-active-bg: var(--mm-slate-800);
+  --mm-sidebar-active-ink: var(--mm-brand-300); /* 8.6:1 sobre slate-800 */
+  --mm-sidebar-border: rgba(255, 255, 255, 0.08);
+  --mm-topbar-bg: rgba(255, 255, 255, 0.88);    /* único glass del shell */
+  --mm-chart-bar: var(--mm-brand-500);
+  --mm-chart-bar-muted: var(--mm-brand-200);
+  --mm-chart-grid: var(--mm-border);
   /* — Movimiento — */
   --mm-dur-fast: 120ms; --mm-dur-base: 180ms; --mm-dur-slow: 280ms;
   --mm-ease: cubic-bezier(0.2, 0.8, 0.2, 1);

@@ -11,3 +11,25 @@
 .mm-stat{display:grid;gap:.15rem}
 .mm-stat b{font-family:var(--mm-font-body);font-size:var(--mm-text-3xl);font-weight:var(--mm-font-weight-semibold);color:var(--mm-text-strong);line-height:1.1;font-variant-numeric:tabular-nums}
 .mm-stat span{font-size:var(--mm-text-sm);color:var(--mm-text-muted);font-weight:var(--mm-font-weight-medium)}
+/* v1.1.0 · tarjeta de panel con encabezado (título + acción) */
+.mm-card__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem}
+.mm-card__head h2,.mm-card__head h3{margin:0;font-size:var(--mm-text-base);font-weight:var(--mm-font-weight-semibold);color:var(--mm-text-strong)}
+.mm-card__sub{font-size:var(--mm-text-xs);color:var(--mm-text-muted)}
+[data-shell] .mm-card{padding:var(--mm-space-4) var(--mm-space-5)}
+.mm-card.mm-card--flush,[data-shell] .mm-card.mm-card--flush{padding:0;gap:0;overflow:hidden}
+.mm-grid{display:grid;gap:var(--mm-space-4);min-width:0}
+.mm-grid>*{min-width:0}
+@media (min-width:768px){.mm-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.mm-grid--3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1200px){.mm-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}.mm-grid--main-side{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}}
+.mm-list{list-style:none;margin:0;padding:0;display:grid}
+.mm-list>li{display:flex;align-items:center;gap:.75rem;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--mm-border);font-size:var(--mm-text-sm);min-width:0}
+.mm-list>li:last-child{border-bottom:0}
+.mm-list a{display:inline-flex;align-items:center;gap:.5rem;min-width:0;color:var(--mm-text-strong);text-decoration:none;font-weight:var(--mm-font-weight-medium)}
+.mm-list a .mm-icon{color:var(--mm-text-muted)}
+.mm-list__bar{flex-wrap:wrap;row-gap:.35rem}
+.mm-list__bar .mm-progress{flex-basis:100%;height:6px}
+.mm-num{font-variant-numeric:tabular-nums;font-weight:var(--mm-font-weight-semibold);color:var(--mm-text-strong);white-space:nowrap}
+.mm-list a:hover{color:var(--mm-link)}
+.mm-dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:.4rem 1rem;margin:0;font-size:var(--mm-text-sm)}
+.mm-dl dt{color:var(--mm-text-muted)}
+.mm-dl dd{margin:0;color:var(--mm-text-strong);overflow-wrap:anywhere}

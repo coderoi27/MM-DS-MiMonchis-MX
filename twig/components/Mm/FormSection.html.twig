@@ -1,0 +1,14 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:FormSection — .mm-fsec · sección plegable de un formulario largo (<details> nativo). «errorCount» = número de errores de la sección (no se llama «errors» para no tapar la variable errors del formulario dentro del bloque)
+   (abre la sección y la marca). collapsible=false la deja fija. Si un campo requerido queda dentro de una sección cerrada, el
+   controlador Stimulus «mm-form» la abre al validar. Uso: <twig:Mm:FormSection id="sec-fecha" title="Fecha y lugar" icon="calendar" :errorCount="2"> … #}
+{% props id, title, description = null, icon = null, open = true, errorCount = 0, collapsible = true %}
+<details {{ attributes.defaults({id: id, class: 'mm-fsec' ~ (errorCount > 0 ? ' mm-fsec--invalid' : '') ~ (collapsible ? '' : ' mm-fsec--static'), open: (open or errorCount > 0 or not collapsible) ? true : false, 'data-mm-form-target': 'section'}) }}>
+    <summary{{ collapsible ? '' : ' tabindex="-1" data-action="click->mm-form#keepOpen"' }}>
+        {% if icon %}<span class="mm-fsec__ico"><twig:Mm:Icon :name="icon" /></span>{% endif %}
+        <span class="mm-fsec__titles"><span class="mm-fsec__title" id="{{ id }}-title">{{ title }}</span>{% if description %}<span class="mm-fsec__desc">{{ description }}</span>{% endif %}</span>
+        {% if errorCount > 0 %}<twig:Mm:Badge tone="danger" icon="circle-alert">{{ errorCount }} {{ errorCount == 1 ? 'error' : 'errores' }}</twig:Mm:Badge>{% endif %}
+        {% if collapsible %}<twig:Mm:Icon name="chevron-down" class="mm-fsec__chev" />{% endif %}
+    </summary>
+    <div class="mm-fsec__body" role="group" aria-labelledby="{{ id }}-title">{% block content %}{% endblock %}</div>
+</details>

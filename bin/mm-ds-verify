@@ -67,7 +67,10 @@ function verify_package(string $root, callable $fail, callable $say): array {
     $files = array_map(fn($f) => basename($f, '.css'), glob("$root/css/components/*.css"));
     foreach (array_diff($files, $im[1]) as $x) $fail("css/components/$x.css no está en mm-components.css");
     foreach (array_diff($im[1], $files) as $x) $fail("mm-components.css importa $x.css que no existe");
-    $say('  ✓ mm-components.css importa los ' . count($files) . ' archivos de css/components/');
+    $tw = (string)@file_get_contents("$root/css/mm-components.tailwind.css");
+    preg_match_all('~components/([a-z-]+)\.css~', $tw, $tm);
+    if ($tm[1] !== $im[1]) $fail('mm-components.tailwind.css no repite el índice de mm-components.css (mismo orden)');
+    $say('  ✓ mm-components.css (y su gemelo .tailwind.css) importan los ' . count($files) . ' archivos de css/components/');
 
     // íconos
     $onDisk = array_map(fn($f) => basename($f, '.svg'), glob("$root/icons/lucide/*.svg"));

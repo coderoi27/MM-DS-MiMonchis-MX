@@ -1,0 +1,13 @@
+{# MM-DS v1.1.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:ErrorSummary — .mm-error-summary · resumen de errores arriba del formulario (además del error junto a cada campo).
+   «errors» = [{label, href?}] (href = #id del campo). Recibe el foco al cargar (data-mm-form-target="summary").
+   Uso: <twig:Mm:ErrorSummary :errors="[{label:'Escribe el nombre', href:'#name'}]" /> #}
+{% props errors = [], title = null %}
+{% if errors %}
+<div {{ attributes.defaults({class: 'mm-error-summary', role: 'alert', tabindex: '-1', 'aria-labelledby': 'mm-error-summary-title', 'data-mm-form-target': 'summary'}) }}>
+    <h2 id="mm-error-summary-title"><twig:Mm:Icon name="circle-alert" />{{ title ?? (errors|length == 1 ? 'Hay 1 campo por corregir' : 'Hay ' ~ errors|length ~ ' campos por corregir') }}</h2>
+    <ul>
+        {% for e in errors %}<li>{% if e.href|default(null) %}<a href="{{ e.href }}" data-action="mm-form#reveal">{{ e.label }}</a>{% else %}{{ e.label }}{% endif %}</li>{% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -1,6 +1,6 @@
 /* MM-DS v1.0.0 · components/field.css · 3-4. Campo de texto y select · NO editar en la app */
 /* 3-4. Campo y select */
-.mm-field{display:grid;gap:.4rem;min-width:0}
+.mm-field{display:grid;gap:.4rem;min-width:0;align-content:start}
 .mm-label{font-size:var(--mm-text-sm);font-weight:var(--mm-font-weight-medium);color:var(--mm-text-strong)}
 .mm-req{color:var(--mm-danger-600);margin-left:.15rem}
 .mm-ctrl{position:relative;display:flex;align-items:center}
