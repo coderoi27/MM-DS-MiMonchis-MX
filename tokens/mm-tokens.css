@@ -124,6 +124,7 @@
   --mm-z-map: 1;       --mm-z-raised: 2;    --mm-z-controls: 20;
   --mm-z-sticky: 40;   --mm-z-overlay: 80;  --mm-z-nav: 90;
   --mm-z-modal: 100;   --mm-z-toast: 110;   --mm-z-cookie: 120;
+  --mm-z-sheet: 95;    /* v1.2.0: hoja del local de Public (cubre la tabbar, queda bajo modal/toast/cookies) */
 
   /* — Derivados B0 (v1.0.0): quitan los últimos literales de color de los componentes — */
   --mm-white: #FFFFFF;                          /* tinta sobre fondos oscuros/saturados */
@@ -163,6 +164,10 @@
   --mm-chart-bar: var(--mm-brand-500);
   --mm-chart-bar-muted: var(--mm-brand-200);
   --mm-chart-grid: var(--mm-border);
+  /* — Public móvil (v1.2.0, P2P5): margen lateral único y alto de la tabbar — */
+  --mm-gutter: var(--mm-space-4);               /* 16px: margen lateral de página, hojas y tarjetas en móvil */
+  --mm-gutter-lg: var(--mm-space-6);            /* 24px: ≥ 768px */
+  --mm-tabbar-h: 4rem;                          /* 64px sin safe-area; los toasts quedan encima */
   /* — Movimiento — */
   --mm-dur-fast: 120ms; --mm-dur-base: 180ms; --mm-dur-slow: 280ms;
   --mm-ease: cubic-bezier(0.2, 0.8, 0.2, 1);

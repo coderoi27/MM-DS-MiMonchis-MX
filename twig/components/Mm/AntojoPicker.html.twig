@@ -1,0 +1,20 @@
+{# MM-DS v1.2.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:AntojoPicker — .mm-antojo-picker · radios nativos con ícono Lucide y polaridad (color + ícono + texto). Ninguno preseleccionado.
+   levels: [{code,label,icon_key,polarity}] en orden positivo → neutral → negativo. Public lo pinta igual desde JS (map_shell).
+   Uso: <twig:Mm:AntojoPicker :levels="levels" question="¿Qué tanto se te antoja volver?" /> #}
+{% props levels = [], question = '¿Qué tanto se te antoja volver?', name = 'antojo_level_code', required = true %}
+<fieldset {{ attributes.defaults({class: 'mm-antojo-picker'}) }}>
+    <legend>{{ question }}</legend>
+    <div class="mm-antojo-picker__scale" aria-hidden="true"><span>Me encantó</span><span>No me convenció</span></div>
+    <div class="mm-antojo-picker__grid">
+        {% for level in levels %}
+            <label class="mm-antojo-option" data-polarity="{{ level.polarity ?? 'neutral' }}">
+                <input type="radio" name="{{ name }}" value="{{ level.code }}"{{ required ? ' required' : '' }}>
+                {% if level.icon_key ?? null %}<twig:Mm:Icon :name="level.icon_key" />{% endif %}
+                <span class="mm-antojo-option__label">{{ level.label }}</span>
+                <span class="mm-antojo-option__check" aria-hidden="true"><twig:Mm:Icon name="check" size="sm" /></span>
+            </label>
+        {% endfor %}
+    </div>
+    <p class="mm-antojo-picker__error" role="alert"></p>
+</fieldset>

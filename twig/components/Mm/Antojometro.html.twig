@@ -1,0 +1,31 @@
+{# MM-DS v1.2.0 · componente anónimo de Symfony UX TwigComponent · NO editar en la app (se sincroniza con bin/mm-ds-sync) #}
+{# Mm:Antojometro — .mm-antojo · porcentaje, nivel (ícono Lucide + texto) y contador; sin reseñas muestra «Sé el primero…».
+   stats: {score_pct, reviews_count, level: {code,label,icon_key,polarity}, display: primary|secondary} (contrato de Public).
+   Uso: <twig:Mm:Antojometro :stats="location.antojometro" /> · compacto: <twig:Mm:Antojometro :stats="s" compact /> #}
+{% props stats = null, compact = false, title = 'Antojómetro', emptyText = 'Sé el primero en contar qué tanto se te antoja.' %}
+{% set count = stats.reviews_count ?? 0 %}
+{% if stats and count >= 1 %}
+    {% set level = stats.level ?? {} %}
+    {% set pct = max(0, min(100, stats.score_pct ?? 0)) %}
+    {% set countLabel = count ~ (count == 1 ? ' reseña Mi Monchis' : ' reseñas Mi Monchis') %}
+    {% set cls = 'mm-antojo' ~ (compact ? ' mm-antojo--compact' : '') ~ ((stats.display ?? 'primary') == 'secondary' ? ' mm-antojo--secondary' : '') %}
+    <div {{ attributes.defaults({class: cls, 'data-polarity': level.polarity ?? 'neutral', role: 'group', 'aria-label': title ~ ': ' ~ pct ~ ' %, ' ~ (level.label ?? 'sin nivel') ~ ', ' ~ countLabel, style: '--mm-antojo-pct: ' ~ pct ~ '%'}) }}>
+        <span class="mm-antojo__score" aria-hidden="true">{{ pct }}<small>%</small></span>
+        <span class="mm-antojo__body" aria-hidden="true">
+            {% if not compact %}<span class="mm-antojo__title">{{ title }}</span>{% endif %}
+            {% if level.label is defined %}
+                <span class="mm-antojo__level">{% if level.icon_key ?? null %}<twig:Mm:Icon :name="level.icon_key" size="sm" />{% endif %}{{ level.label }}</span>
+            {% endif %}
+            <span class="mm-antojo__count">{{ countLabel }}</span>
+        </span>
+        {% if not compact %}<span class="mm-antojo__meter" aria-hidden="true"><span></span></span>{% endif %}
+    </div>
+{% else %}
+    <div {{ attributes.defaults({class: 'mm-antojo mm-antojo--empty' ~ (compact ? ' mm-antojo--compact' : '')}) }}>
+        <span class="mm-antojo__empty-icon"><twig:Mm:Icon name="message-square-heart" /></span>
+        <span class="mm-antojo__body">
+            {% if not compact %}<span class="mm-antojo__title">{{ title }}</span>{% endif %}
+            <p class="mm-antojo__empty-text">{{ emptyText }}</p>
+        </span>
+    </div>
+{% endif %}
