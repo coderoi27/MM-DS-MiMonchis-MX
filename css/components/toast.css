@@ -3,3 +3,13 @@
 .mm-toast .mm-icon:first-child{color:var(--mm-brand-300)}
 .mm-toast .mm-icon-btn{color:var(--mm-white);margin-left:auto;width:36px;height:36px}
 .mm-toast .mm-icon-btn:hover{background:var(--mm-hover-on-dark)}
+/* v1.2.0 · pila de toasts (Public): sobre la tabbar en móvil, abajo a la derecha en escritorio; máx. 3 */
+.mm-toast-stack{position:fixed;left:var(--mm-gutter);right:var(--mm-gutter);bottom:calc(var(--mm-tabbar-h) + var(--mm-space-3) + env(safe-area-inset-bottom));z-index:var(--mm-z-toast);display:grid;justify-items:center;gap:var(--mm-space-2);pointer-events:none}
+.mm-toast-stack .mm-toast{pointer-events:auto;width:100%;animation:mm-toast-in var(--mm-dur-slow) var(--mm-ease)}
+.mm-toast--success .mm-icon:first-child{color:var(--mm-success-border)}
+.mm-toast--danger .mm-icon:first-child{color:var(--mm-danger-border)}
+.mm-toast__body{display:grid;gap:2px;min-width:0}
+.mm-toast__body strong{font-weight:var(--mm-font-weight-semibold)}
+@keyframes mm-toast-in{from{opacity:0;transform:translateY(8px)}}
+@media (min-width:768px){.mm-toast-stack{left:auto;right:var(--mm-gutter-lg);bottom:var(--mm-gutter-lg);width:min(380px,calc(100vw - 2 * var(--mm-gutter-lg)));justify-items:end}}
+@media (prefers-reduced-motion:reduce){.mm-toast-stack .mm-toast{animation:none}}

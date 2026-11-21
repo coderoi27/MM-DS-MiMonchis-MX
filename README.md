@@ -1,4 +1,4 @@
-# MM-DS · sistema de diseño de Mi Monchis MX — v1.1.0
+# MM-DS · sistema de diseño de Mi Monchis MX — v1.2.0
 
 Fuente única de **tokens, CSS, componentes Twig, íconos, fuente y marca** para Public, Admin y Locals.
 Aquí se edita; en las apps solo se **copia** (con `bin/mm-ds-sync`) y se **verifica** (con `bin/mm-ds-verify`).
@@ -89,6 +89,13 @@ La lista de pre-zip de cada app añade (ver doc 02, B5): «hex fuera de `mm-toke
 - **Cambios compatibles:** `Mm:Table` (`cards`, `scroll`), `Mm:Field` (`grow`), `Mm:Pagination` (`prevLabel`/`nextLabel`), `Mm:Alert` (`data-controller="mm-alert"` si es `dismissible`).
 - **JS (en cada app, no en el paquete):** `mm-shell` (drawer, rail, atajos), `mm-cmdk`, `mm-alert`, `mm-form`, `mm-details`, `mm-dialog`, `mm-confirm`. Admin los trae desde A3.
 - **Ojo con los props dentro de bloques:** el contenido de un componente ve los props del componente antes que las variables de la vista (por eso `Mm:FormSection` usa `errorCount` y no `errors`). Las macros importadas en la vista tampoco se ven dentro del bloque: impórtalas ahí.
+
+## v1.2.0 — Public P2/P3/P5 (21-nov, `CLAUDE-UI-DS-PUBLIC-P2P5-006`)
+
+- **Tokens:** `--mm-gutter` (16 px, margen lateral único en móvil), `--mm-gutter-lg` (24 px), `--mm-tabbar-h` (64 px) y `--mm-z-sheet` (95: la hoja del local cubre la tabbar y queda debajo de modal, toast y cookies).
+- **Componentes nuevos:** `Mm:Antojometro` (`.mm-antojo`: porcentaje, nivel con ícono Lucide y contador; variante compacta, secundaria para Places y vacía «Sé el primero…») y `Mm:AntojoPicker` (`.mm-antojo-picker`: radios nativos en rejilla de 3 con ícono, polaridad por color + ícono + texto, escala «Me encantó / No me convenció», ninguno preseleccionado, error con `role="alert"`).
+- **Cambios compatibles:** `.mm-badge--google` (calificación de Google separada del Antojómetro), `.mm-toast-stack` (pila sobre la tabbar en móvil; abajo a la derecha en escritorio) con tonos `--success`/`--danger`.
+- **Íconos nuevos:** `repeat`, `smile`, `frown`, `circle-x`, `flame`, `message-square-heart` (niveles del Antojómetro de Public).
 
 ## Qué NO hace v1.0.0 (pendiente)
 

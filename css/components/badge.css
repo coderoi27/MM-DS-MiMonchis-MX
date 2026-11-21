@@ -7,3 +7,7 @@
 .mm-badge--warning{background:var(--mm-warning-bg);color:var(--mm-warning-700)}
 .mm-badge--danger{background:var(--mm-danger-bg);color:var(--mm-danger-600)}
 .mm-badge--info{background:var(--mm-info-bg);color:var(--mm-info-700)}
+/* v1.2.0 · origen y calificación externa (Places): «Google ★ 4.7», separada del Antojómetro */
+.mm-badge--google{background:var(--mm-surface);color:var(--mm-text-strong);border:1px solid var(--mm-border-strong)}
+.mm-badge--google .mm-icon{color:var(--mm-warning-700)}
+.mm-badge--google .mm-icon,.mm-badge--google .mm-icon *{fill:var(--mm-rating)}
